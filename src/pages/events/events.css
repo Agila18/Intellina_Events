@@ -1,0 +1,720 @@
+/* ==========================================
+   INTELLINA Events - Stranger Things Theme
+   Glassmorphism + Neon Cyberpunk Aesthetic
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Libre+Baskerville:wght@700&display=swap');
+
+
+
+/* ==========================================
+   BASE STYLES & RESET
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  background: #000;
+}
+
+/* ==========================================
+   EVENTS CONTAINER - DARK CINEMATIC ATMOSPHERE
+   ========================================== */
+.events-container {
+  min-height: 100vh;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%),
+    url('./images/events-bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #ffffff;
+  padding: 120px 20px 60px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Specific black background for event list pages */
+.events-black-bg {
+  background: #000 !important;
+  background-image: none !important;
+}
+
+/* Animated red/pink neon glow atmosphere */
+.events-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 26, 26, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+  animation: atmosphericPulse 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes atmosphericPulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Global Ash Dust Drifting */
+.events-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(1.5px 1.5px at 50px 160px, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0, 0, 0, 0));
+  background-size: 200px 200px;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  animation: driftDust 60s linear infinite;
+}
+
+@keyframes driftDust {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 1000px 1000px;
+  }
+}
+
+/* ==========================================
+   EVENTS LANDING PAGE - CATEGORY PORTALS
+   ========================================== */
+.events-landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  position: relative;
+  z-index: 10;
+}
+
+.events-landing-title {
+  font-family: 'Benguiat', serif;
+  font-size: clamp(3rem, 6vw, 5.3rem);
+
+  /* Hollow Effect with Glowy "Reddy White" Fill */
+  color: #fffaf0;
+  /* Reddy white fill */
+  -webkit-text-stroke: 2px #ff0000;
+  /* Red outline */
+
+  text-shadow:
+    0 0 15px rgba(255, 0, 0, 0.8),
+    0 0 30px rgba(255, 0, 0, 0.6),
+    0 0 45px rgba(255, 0, 0, 0.4),
+    0 0 10px #fffaf0 inset;
+  /* Inner glow hint */
+
+  font-weight: 900;
+  letter-spacing: 5.2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.events-landing-title:hover {
+  text-shadow:
+    0 0 25px rgba(255, 0, 0, 1),
+    0 0 50px rgba(255, 0, 0, 0.8),
+    0 0 75px rgba(255, 0, 0, 0.6);
+  transform: scale(1.02);
+}
+
+.event-card {
+  background: linear-gradient(135deg,
+      rgba(0, 0, 0, 0.65),
+      rgba(20, 0, 20, 0.85));
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 0, 60, 0.6);
+  box-shadow:
+    0 0 15px rgba(255, 0, 60, 0.3);
+  border: 1.5px solid rgba(255, 0, 60, 0.6);
+  box-shadow:
+    0 0 15px rgba(255, 0, 60, 0.3);
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow:
+      0 0 30px rgba(229, 9, 20, 1),
+      0 0 60px rgba(229, 9, 20, 0.8),
+      0 0 90px rgba(229, 9, 20, 0.5);
+  }
+
+  100% {
+    text-shadow:
+      0 0 40px rgba(229, 9, 20, 1),
+      0 0 80px rgba(229, 9, 20, 1),
+      0 0 120px rgba(229, 9, 20, 0.7);
+  }
+}
+
+.event-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow:
+    0 30px 60px rgba(36, 33, 33, 0.8),
+    0 0 30px rgba(255, 0, 60, 0.6);
+}
+
+.event-card h2 {
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 12px rgba(255, 0, 60, 0.6);
+}
+
+.events-landing-subtitle {
+  font-size: 0.95rem;
+  color: rgba(211, 55, 55, 0.72);
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin-bottom: 70px;
+  font-weight: 400;
+  opacity: 0.8;
+  font-weight: 700;
+  text-shadow: 0 0 18px rgba(245, 46, 56, 0.35);
+  transition: all 0.3s ease;
+}
+
+.events-landing-subtitle:hover {
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+}
+
+/* Event Grid - Massive Columns - Scaled for 2x Presence */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 80px 25px;
+  /* Row gap 80px, Column gap 25px */
+  width: 95%;
+  max-width: 1500px;
+  margin: 60px auto;
+  position: relative;
+  z-index: 10;
+  justify-content: center;
+}
+
+/* Category Cards Grid - Preservation */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+  max-width: 1400px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* ==========================================
+   CATEGORY CARD - GLASS PORTAL STYLE
+   ========================================== */
+.category-card {
+  position: relative;
+  background: rgba(15, 0, 0, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2.5px solid rgba(229, 9, 20, 0.45);
+  border-radius: 26px;
+  padding: 85px 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow:
+    0 0 35px rgba(229, 9, 20, 0.35),
+    0 18px 50px rgba(0, 0, 0, 0.65),
+    inset 0 0 50px rgba(229, 9, 20, 0.08);
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Portal glow effect inside card */
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 130%;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: all 0.6s ease;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.7;
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 26px;
+  background: linear-gradient(135deg,
+      rgba(229, 9, 20, 0.3) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(229, 9, 20, 0.25) 100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 0;
+  animation: portalSwirl 8s linear infinite paused;
+}
+
+.category-card:hover::before {
+  transform: translate(-50%, -50%) scale(1.3);
+  opacity: 1;
+  animation: portalPulseStrong 2s ease-in-out infinite;
+}
+
+.category-card:hover::after {
+  opacity: 0.6;
+  animation-play-state: running;
+}
+
+@keyframes portalPulseStrong {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: blur(50px);
+  }
+
+  50% {
+    opacity: 1;
+    filter: blur(60px);
+  }
+}
+
+@keyframes portalSwirl {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover Effects - Premium Interactive Feel + Flicker */
+.category-card:hover {
+  transform: translateY(-15px) scale(1.06);
+  border-color: rgba(229, 9, 20, 0.9);
+  box-shadow:
+    0 0 70px rgba(229, 9, 20, 0.7),
+    0 0 100px rgba(229, 9, 20, 0.4),
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    inset 0 0 70px rgba(229, 9, 20, 0.15);
+  background: rgba(35, 33, 33, 0.6);
+  animation: cardFlicker 0.15s ease-in-out 2;
+}
+
+/* Flicker Animation */
+@keyframes cardFlicker {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.95;
+    border-color: rgba(229, 9, 20, 0.75);
+  }
+}
+
+/* Animations reused from EventCard.css logic or defined globally below if needed */
+@keyframes vhsFlicker {
+  0% {
+    transform: translateY(0);
+  }
+
+  1% {
+    transform: translateY(-1px);
+    opacity: 0.7;
+  }
+
+  2% {
+    transform: translateY(1px);
+    opacity: 0.5;
+  }
+
+  3% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitchLines {
+  0% {
+    clip-path: inset(10% 0 80% 0);
+    transform: translate(-2px);
+  }
+
+  20% {
+    clip-path: inset(40% 0 40% 0);
+    transform: translate(2px);
+  }
+
+  40% {
+    clip-path: inset(70% 0 20% 0);
+    transform: translate(-1px);
+  }
+
+  60% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(1px);
+  }
+
+  80% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translate(-2px);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+  }
+}
+
+.category-card:active {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.category-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  /* Normal sans-serif font */
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.category-card:hover .category-card-title {
+  text-shadow:
+    0 0 30px rgba(229, 9, 20, 1),
+    0 0 60px rgba(229, 9, 20, 0.9),
+    0 0 90px rgba(229, 9, 20, 0.6);
+  transform: scale(1.05);
+}
+
+.category-card-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 2px;
+  font-weight: 400;
+  position: relative;
+  z-index: 2;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================
+   EVENT LIST PAGE LAYOUT
+   ========================================== */
+.event-list-container {
+  width: 100%;
+  max-width: 100%;
+  /* Allow full width for massive cards */
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.event-list-header {
+  text-align: center;
+  margin-bottom: 40px;
+  /* Further reduced from 60px */
+  padding-top: 5px;
+  /* Shifted up slightly more */
+}
+
+.event-list-title {
+  font-family: 'Benguiat', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: #ff1a1a;
+  text-shadow: 0 0 30px rgba(255, 0, 0, 1);
+  font-weight: 900;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.event-list-title:hover {
+  text-shadow:
+    0 0 40px rgba(255, 0, 0, 1),
+    0 0 80px rgba(255, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.event-list-description {
+  display: none;
+  /* User said "text at the top is not needed" */
+}
+
+/* Redundant grid removed to prevent override */
+
+/* Flagship Card Container - Single Centered Card */
+.flagship-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 60vh;
+}
+
+.flagship-card-container>* {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ==========================================
+   BREADCRUMB
+   ========================================== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0;
+  font-size: 13px;
+  /* Slightly smaller for the corner */
+  color: rgba(255, 255, 255, 0.45);
+  flex-wrap: wrap;
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  z-index: 50;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+}
+
+.breadcrumb a {
+  color: rgba(229, 9, 20, 0.8);
+  text-decoration: none;
+  transition: all 0.3s;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+}
+
+.breadcrumb a:hover {
+  color: #ff3333;
+  text-shadow: 0 0 25px rgba(229, 9, 20, 1), 0 0 45px rgba(255, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumb-current {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 1200px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .events-container {
+    padding: 40px 40px 80px;
+  }
+
+  .category-card {
+    padding: 60px 30px;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .events-container {
+    padding: 30px 20px 60px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .category-card {
+    padding: 50px 25px;
+    min-height: 250px;
+  }
+
+  .events-landing-subtitle {
+    margin-bottom: 60px;
+  }
+
+  .event-list-header {
+    margin-bottom: 60px;
+  }
+
+  .flagship-card-container {
+    padding: 20px;
+    min-height: 50vh;
+  }
+
+  .flagship-card-container>* {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-container {
+    padding: 20px 15px 50px;
+  }
+
+  .category-card {
+    padding: 40px 20px;
+    min-height: 220px;
+  }
+
+  .category-card-title {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+}
+
+/* ==========================================
+   ENTRANCE ANIMATIONS
+   ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-card {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.category-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.category-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.category-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* This creates click ripples on cards and buttons */
+.category-card,
+.glass-event-card,
+.btn-stylized {
+  overflow: hidden;
+  position: relative;
+}
+
+/* At the end of events.css */
+::selection {
+  background: rgba(229, 9, 20, 0.4);
+  color: #ffffff;
+}
+
+/* At the end of events.css */
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(229, 9, 20, 0.4),
+    0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+.events-container {
+  position: relative;
+}
+
+.stranger-font {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  /* The iconic outline and glow */
+  -webkit-text-stroke: 1px #E71D36;
+  /* Fallback */
+  color: transparent;
+  -webkit-text-stroke: 2px #E71D36;
+  text-shadow: 0 0 15px rgba(231, 29, 54, 0.6);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stranger-font:hover {
+  text-shadow:
+    0 0 20px rgb(237, 57, 66),
+    0 0 40px rgba(229, 9, 20, 0.8),
+    0 0 60px rgba(229, 9, 20, 0.6);
+  transform: scale(1.02);
+  color: rgba(229, 29, 54, 0.1);
+  /* Slight fill on hover for better visibility */
+}
