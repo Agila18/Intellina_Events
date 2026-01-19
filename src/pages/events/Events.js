@@ -2,12 +2,27 @@ import React from 'react';
 import CategoryCard from '../../components/CategoryCard';
 import './events.css';
 const Events = () => {
+  const voiceLines = {
+    technical: {
+      character: 'Dustin',
+      audio: '/assets/audio/dustin-technical.mp3',
+      subtitle: 'Check out our Technical Events. Over!'
+    },
+    nontech: {
+      character: 'Max',
+      audio: '/assets/audio/max-nontech.mp3',
+      subtitle: 'Non-Tech Events - jump right in. Over!'
+    },
+    flagship: {
+      character: 'Steve',
+      audio: '/assets/audio/steve-flagship.mp3',
+      subtitle: 'Flagship Events - don\'t miss these. Over!'
+    }
+  };
+
   return (
     <>
       <div className="events-container">
-
-
-
         {/* Overlay Content */}
         <div className="events-landing">
           <h1 className="events-landing-title stranger-font typing">
@@ -22,21 +37,33 @@ const Events = () => {
             <CategoryCard
               title="TECHNICAL EVENTS"
               subtitle="Innovate. Build. Compete."
-              route="/events/technical" />
+              route="/events/technical"
+              character={voiceLines.technical.character}
+              audioSrc={voiceLines.technical.audio}
+              subtitleText={voiceLines.technical.subtitle}
+            />
 
             <CategoryCard
               title="NON-TECH EVENTS"
               subtitle="Think. Play. Survive."
-              route="/events/non-tech" />
+              route="/events/non-tech"
+              character={voiceLines.nontech.character}
+              audioSrc={voiceLines.nontech.audio}
+              subtitleText={voiceLines.nontech.subtitle}
+            />
 
             <CategoryCard
               title="FLAGSHIP EVENT"
               subtitle="The Main Gate."
-              route="/events/flagship" />
+              route="/events/flagship"
+              character={voiceLines.flagship.character}
+              audioSrc={voiceLines.flagship.audio}
+              subtitleText={voiceLines.flagship.subtitle}
+            />
           </div>
         </div>
-
-      </div></>
+      </div>
+    </>
   );
 };
 
