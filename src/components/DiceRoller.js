@@ -17,6 +17,8 @@ const DiceRoller = ({ category = 'technical' }) => {
     const [showResult, setShowResult] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [showPrompt, setShowPrompt] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isCentering, setIsCentering] = useState(false);
     const timeoutRef = useRef(null);
 
     useEffect(() => {
@@ -34,26 +36,33 @@ const DiceRoller = ({ category = 'technical' }) => {
     };
 
     const handleRoll = () => {
-        if (isRolling) return;
+        if (isRolling || isCentering) return;
 
-        setIsRolling(true);
+        setIsCentering(true);
         setShowResult(false);
 
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
+        // Stage 1: Move to center (0.6s)
         timeoutRef.current = setTimeout(() => {
-            const face = randomFace();
-            setCurrentFace(face);
-            setIsRolling(false);
+            setIsCentering(false);
+            setIsRolling(true);
 
-            // Randomly select an event from the category using the centralized data
-            const categoryEvents = flattenedEvents.filter(e => e.category === category);
-            if (categoryEvents.length > 0) {
-                const randomEvent = categoryEvents[Math.floor(Math.random() * categoryEvents.length)];
-                setSelectedEvent(randomEvent);
-                setShowResult(true);
-            }
-        }, 3000);
+            // Stage 2: Roll in center (1s)
+            timeoutRef.current = setTimeout(() => {
+                const face = randomFace();
+                setCurrentFace(face);
+                setIsRolling(false);
+
+                // Randomly select an event from the category using the centralized data
+                const categoryEvents = flattenedEvents.filter(e => e.category === category);
+                if (categoryEvents.length > 0) {
+                    const randomEvent = categoryEvents[Math.floor(Math.random() * categoryEvents.length)];
+                    setSelectedEvent(randomEvent);
+                    setShowResult(true);
+                }
+            }, 1000);
+        }, 600);
     };
 
     const handleViewDetails = () => {
@@ -90,9 +99,16 @@ const DiceRoller = ({ category = 'technical' }) => {
           bottom: 24px;
           right: 24px;
           z-index: 50;
-          width: 200px;
-          height: 200px;
-          perspective: 1500px;
+          width: 160px;
+          height: 160px;
+          perspective: 1200px;
+          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .dice-container.centered {
+          bottom: 50%;
+          right: 50%;
+          transform: translate(50%, 50%) scale(1.5);
         }
 
         .die {
@@ -113,7 +129,7 @@ const DiceRoller = ({ category = 'technical' }) => {
         }
 
         .die.rolling {
-          animation: roll 3s linear;
+          animation: roll 1s linear infinite;
         }
 
         .die[data-face="1"] { transform: rotateX(-53deg) rotateY(0deg); }
@@ -144,9 +160,9 @@ const DiceRoller = ({ category = 'technical' }) => {
           position: absolute;
           left: 50%;
           top: 0;
-          margin: 0 -50px;
-          border-left: 50px solid transparent;
-          border-right: 50px solid transparent;
+          margin: 0 -40px;
+          border-left: 40px solid transparent;
+          border-right: 40px solid transparent;
           width: 0;
           height: 0;
           transform-style: preserve-3d;
@@ -154,25 +170,25 @@ const DiceRoller = ({ category = 'technical' }) => {
         }
 
         .face.red {
-          border-bottom: 86px solid rgba(220, 38, 38, 0.9);
+          border-bottom: 68.8px solid rgba(220, 38, 38, 0.9);
         }
 
         .face.blue {
-          border-bottom: 86px solid rgba(29, 78, 216, 0.9);
+          border-bottom: 68.8px solid rgba(29, 78, 216, 0.9);
         }
 
         .face::before {
           position: absolute;
-          top: 21.5px;
-          left: -100px;
+          top: 17.2px;
+          left: -80px;
           color: #fff;
           text-shadow: 2px 2px 4px #000;
-          font-size: 43px;
+          font-size: 34.4px;
           font-weight: bold;
           text-align: center;
-          line-height: 77.4px;
-          width: 200px;
-          height: 86px;
+          line-height: 61.92px;
+          width: 160px;
+          height: 68.8px;
         }
 
         .face-1::before { content: '1'; }
@@ -197,32 +213,32 @@ const DiceRoller = ({ category = 'technical' }) => {
         .face-20::before { content: '20'; }
 
         /* Face positions - Top ring (1-5) */
-        .face-1 { transform: rotateY(0deg) translateZ(33.5px) translateY(-12.9px) rotateX(53deg); }
-        .face-2 { transform: rotateY(-72deg) translateZ(33.5px) translateY(-12.9px) rotateX(53deg); }
-        .face-3 { transform: rotateY(-144deg) translateZ(33.5px) translateY(-12.9px) rotateX(53deg); }
-        .face-4 { transform: rotateY(-216deg) translateZ(33.5px) translateY(-12.9px) rotateX(53deg); }
-        .face-5 { transform: rotateY(-288deg) translateZ(33.5px) translateY(-12.9px) rotateX(53deg); }
+        .face-1 { transform: rotateY(0deg) translateZ(26.8px) translateY(-10.32px) rotateX(53deg); }
+        .face-2 { transform: rotateY(-72deg) translateZ(26.8px) translateY(-10.32px) rotateX(53deg); }
+        .face-3 { transform: rotateY(-144deg) translateZ(26.8px) translateY(-10.32px) rotateX(53deg); }
+        .face-4 { transform: rotateY(-216deg) translateZ(26.8px) translateY(-10.32px) rotateX(53deg); }
+        .face-5 { transform: rotateY(-288deg) translateZ(26.8px) translateY(-10.32px) rotateX(53deg); }
 
         /* Middle upper ring (6-10) */
-        .face-6 { transform: rotateY(0deg) translateZ(75px) translateY(54.18px) rotateZ(180deg) rotateX(-11deg); }
-        .face-7 { transform: rotateY(-72deg) translateZ(75px) translateY(54.18px) rotateZ(180deg) rotateX(-11deg); }
-        .face-8 { transform: rotateY(-144deg) translateZ(75px) translateY(54.18px) rotateZ(180deg) rotateX(-11deg); }
-        .face-9 { transform: rotateY(-216deg) translateZ(75px) translateY(54.18px) rotateZ(180deg) rotateX(-11deg); }
-        .face-10 { transform: rotateY(-288deg) translateZ(75px) translateY(54.18px) rotateZ(180deg) rotateX(-11deg); }
+        .face-6 { transform: rotateY(0deg) translateZ(60px) translateY(43.344px) rotateZ(180deg) rotateX(-11deg); }
+        .face-7 { transform: rotateY(-72deg) translateZ(60px) translateY(43.344px) rotateZ(180deg) rotateX(-11deg); }
+        .face-8 { transform: rotateY(-144deg) translateZ(60px) translateY(43.344px) rotateZ(180deg) rotateX(-11deg); }
+        .face-9 { transform: rotateY(-216deg) translateZ(60px) translateY(43.344px) rotateZ(180deg) rotateX(-11deg); }
+        .face-10 { transform: rotateY(-288deg) translateZ(60px) translateY(43.344px) rotateZ(180deg) rotateX(-11deg); }
 
         /* Middle lower ring (11-15) */
-        .face-11 { transform: rotateY(-36deg) translateZ(75px) translateY(54.18px) rotateX(-11deg); }
-        .face-12 { transform: rotateY(36deg) translateZ(75px) translateY(54.18px) rotateX(-11deg); }
-        .face-13 { transform: rotateY(108deg) translateZ(75px) translateY(54.18px) rotateX(-11deg); }
-        .face-14 { transform: rotateY(180deg) translateZ(75px) translateY(54.18px) rotateX(-11deg); }
-        .face-15 { transform: rotateY(252deg) translateZ(75px) translateY(54.18px) rotateX(-11deg); }
+        .face-11 { transform: rotateY(-36deg) translateZ(60px) translateY(43.344px) rotateX(-11deg); }
+        .face-12 { transform: rotateY(36deg) translateZ(60px) translateY(43.344px) rotateX(-11deg); }
+        .face-13 { transform: rotateY(108deg) translateZ(60px) translateY(43.344px) rotateX(-11deg); }
+        .face-14 { transform: rotateY(180deg) translateZ(60px) translateY(43.344px) rotateX(-11deg); }
+        .face-15 { transform: rotateY(252deg) translateZ(60px) translateY(43.344px) rotateX(-11deg); }
 
         /* Bottom ring (16-20) */
-        .face-16 { transform: rotateY(36deg) translateZ(33.5px) translateY(121.08px) rotateZ(180deg) rotateX(53deg); }
-        .face-17 { transform: rotateY(108deg) translateZ(33.5px) translateY(121.08px) rotateZ(180deg) rotateX(53deg); }
-        .face-18 { transform: rotateY(180deg) translateZ(33.5px) translateY(121.08px) rotateZ(180deg) rotateX(53deg); }
-        .face-19 { transform: rotateY(252deg) translateZ(33.5px) translateY(121.08px) rotateZ(180deg) rotateX(53deg); }
-        .face-20 { transform: rotateY(324deg) translateZ(33.5px) translateY(121.08px) rotateZ(180deg) rotateX(53deg); }
+        .face-16 { transform: rotateY(36deg) translateZ(26.8px) translateY(96.864px) rotateZ(180deg) rotateX(53deg); }
+        .face-17 { transform: rotateY(108deg) translateZ(26.8px) translateY(96.864px) rotateZ(180deg) rotateX(53deg); }
+        .face-18 { transform: rotateY(180deg) translateZ(26.8px) translateY(96.864px) rotateZ(180deg) rotateX(53deg); }
+        .face-19 { transform: rotateY(252deg) translateZ(26.8px) translateY(96.864px) rotateZ(180deg) rotateX(53deg); }
+        .face-20 { transform: rotateY(324deg) translateZ(26.8px) translateY(96.864px) rotateZ(180deg) rotateX(53deg); }
 
         @keyframes fadeIn {
           from { opacity: 0; }
@@ -241,17 +257,22 @@ const DiceRoller = ({ category = 'technical' }) => {
       `}</style>
 
             {/* Dice Tooltip Prompt */}
-            {showPrompt && !isRolling && !showResult && (
-                <div className="fixed bottom-[200px] right-[40px] z-50 animate-fadeIn">
-                    <div className="bg-white text-gray-900 px-4 py-2 rounded-2xl shadow-xl relative">
-                        <p className="text-sm font-bold whitespace-nowrap">Click me to know your lucky event!</p>
-                        <div className="absolute bottom-[-8px] right-[40px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-white"></div>
+            {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && (
+                <div className="fixed bottom-[180px] right-[40px] z-[60] animate-fadeIn pointer-events-none">
+                    <div className="bg-black text-white px-5 py-3 rounded-xl border border-red-500/50 shadow-[0_0_20px_rgba(255,0,0,0.4)] relative">
+                        <p className="text-sm font-bold tracking-wider uppercase">Tap Your Lucky Event!</p>
+                        <div className="absolute bottom-[-8px] right-[40px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-black"></div>
+                        <div className="absolute bottom-[-9px] right-[40px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-red-500/50 -z-10"></div>
                     </div>
                 </div>
             )}
 
             {/* Dice in bottom right corner */}
-            <div className="dice-container">
+            <div
+                className={`dice-container ${(isRolling || isCentering) ? 'centered' : ''}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
                 <div
                     className={`die ${isRolling ? 'rolling' : 'idle'}`}
                     data-face={currentFace}
@@ -274,10 +295,20 @@ const DiceRoller = ({ category = 'technical' }) => {
                             <div className="text-yellow-400 text-5xl mb-4">🎲</div>
                             <h2 className="text-white text-2xl font-bold mb-2">Your Lucky Event is:</h2>
                             <h3 className="text-yellow-300 text-3xl font-extrabold mb-4">{selectedEvent.title}</h3>
-                            <p className="text-gray-300 text-sm mb-4 leading-relaxed">{selectedEvent.description}</p>
-                            <div className="bg-red-600 bg-opacity-20 border border-red-500 rounded-lg p-3 mb-6">
-                                <p className="text-white text-xs uppercase tracking-wide mb-1">Prizes Worth</p>
-                                <p className="text-red-400 text-2xl font-bold">₹ {selectedEvent.prizes} *</p>
+                            <div className="flex flex-col gap-2 mb-6">
+                                <div className="flex items-center justify-between bg-white bg-opacity-5 rounded-lg px-4 py-2 border border-white/10">
+                                    <span className="text-gray-400 text-xs uppercase tracking-widest">Portal Level</span>
+                                    <span className="text-red-500 font-bold uppercase text-xs">Critical</span>
+                                </div>
+                                <div className="flex items-center justify-between bg-white bg-opacity-5 rounded-lg px-4 py-2 border border-white/10">
+                                    <span className="text-gray-400 text-xs uppercase tracking-widest">Status</span>
+                                    <span className="text-green-500 font-bold uppercase text-xs">Highly Recommended</span>
+                                </div>
+                            </div>
+                            <p className="text-gray-300 text-sm mb-6 leading-relaxed italic">"{selectedEvent.description}"</p>
+                            <div className="bg-red-600 bg-opacity-20 border border-red-500 rounded-xl p-4 mb-8">
+                                <p className="text-white text-xs uppercase tracking-widest mb-1 opacity-70">Prizes Worth</p>
+                                <p className="text-red-400 text-3xl font-black">₹ {selectedEvent.prizes} *</p>
                             </div>
                             <div className="flex gap-3">
                                 <button

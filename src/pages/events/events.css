@@ -131,40 +131,126 @@ body {
   left: 10%;
   animation-duration: 12s;
   animation-delay: 0s;
+  width: 5px;
+  height: 5px;
 }
 
 .spore:nth-child(2) {
   left: 25%;
   animation-duration: 18s;
   animation-delay: 2s;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 .spore:nth-child(3) {
   left: 40%;
   animation-duration: 10s;
   animation-delay: 5s;
+  width: 5px;
+  height: 5px;
 }
 
 .spore:nth-child(4) {
   left: 60%;
   animation-duration: 22s;
   animation-delay: 1s;
-  width: 3px;
-  height: 3px;
+  width: 6px;
+  height: 6px;
 }
 
 .spore:nth-child(5) {
   left: 75%;
   animation-duration: 14s;
   animation-delay: 3s;
+  width: 5px;
+  height: 5px;
 }
 
 .spore:nth-child(6) {
   left: 90%;
   animation-duration: 16s;
   animation-delay: 6s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(7) {
+  left: 15%;
+  animation-duration: 20s;
+  animation-delay: 4s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(8) {
+  left: 35%;
+  animation-duration: 13s;
+  animation-delay: 8s;
+ width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(9) {
+  left: 55%;
+  animation-duration: 17s;
+  animation-delay: 1s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(10) {
+  left: 80%;
+  animation-duration: 11s;
+  animation-delay: 3s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(11) {
+  left: 5%;
+  animation-duration: 25s;
+  animation-delay: 0s;
+  width: 6px;
+  height: 6px;
+}
+
+.spore:nth-child(12) {
+  left: 45%;
+  animation-duration: 19s;
+  animation-delay: 10s;
+  width: 4px;
+  height: 4px;
+}
+
+.spore:nth-child(13) {
+  left: 65%;
+  animation-duration: 15s;
+  animation-delay: 2s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(14) {
+  left: 85%;
+  animation-duration: 21s;
+  animation-delay: 7s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(15) {
+  left: 20%;
+  animation-duration: 14s;
+  animation-delay: 5s;
+  width: 5px;
+  height: 5px;
+}
+
+.spore:nth-child(16) {
+  left: 70%;
+  animation-duration: 18s;
+  animation-delay: 9s;
   width: 5px;
   height: 5px;
 }
@@ -240,7 +326,7 @@ body {
 }
 
 .events-landing-title {
-  font-family:  serif;
+  font-family: serif;
   font-size: clamp(3rem, 6vw, 5.3rem);
 
   /* Hollow Effect with Glowy "Reddy White" Fill */
@@ -363,9 +449,11 @@ body {
    ========================================== */
 .category-card {
   position: relative;
-  background: rgba(15, 0, 0, 0.45);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(15, 0, 0, 0.35);
+  /* More transparent background */
+  backdrop-filter: blur(16px);
+  /* Increased blur */
+  -webkit-backdrop-filter: blur(16px);
   border: 2.5px solid rgba(229, 9, 20, 0.45);
   border-radius: 26px;
   padding: 85px 40px;

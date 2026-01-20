@@ -32,6 +32,16 @@ const Events = () => {
           <div className="spore"></div>
           <div className="spore"></div>
           <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
         </div>
         <div className="fog-layer"></div>
 
