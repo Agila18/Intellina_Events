@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './WalkieTalkie.css';
 
-const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle }) => {
+const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, persistActive }) => {
     const [status, setStatus] = useState('idle'); // idle, transmitting
     const [currentSubtitle, setCurrentSubtitle] = useState('');
     const [showSubtitle, setShowSubtitle] = useState(false);
@@ -74,8 +74,12 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle }) =
 
             // 4. End transmission
             if (isMounted.current) {
-                staticAudio.pause();
-                await playAudio('/assets/audio/walkie-squelch.mp3'); // Squelch out
+                // If persistActive is true, we don't pause the static or status yet
+                // The component unmounting will clean it up naturally
+                if (!persistActive) {
+                    staticAudio.pause();
+                    await playAudio('/assets/audio/walkie-squelch.mp3'); // Squelch out
+                }
             }
 
         } catch (err) {
@@ -83,7 +87,9 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle }) =
         }
 
         if (isMounted.current) {
-            setStatus('idle');
+            if (!persistActive) {
+                setStatus('idle');
+            }
             if (onComplete) onComplete();
         }
     };

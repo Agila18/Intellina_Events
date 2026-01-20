@@ -56,6 +56,7 @@ const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleTex
         character={character}
         audioSrc={audioSrc}
         subtitle={subtitleText}
+        persistActive={true}
       />
     </div>
   );

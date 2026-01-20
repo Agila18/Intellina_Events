@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import './events.css';
-
 import ParticlesBackground from '../../components/ParticlesBackground';
 
 const Flagship = () => {
@@ -41,22 +41,62 @@ const Flagship = () => {
     navigate(`/events/flagship/${eventId}`);
   };
 
-  // Dice logic is now handled internally by DiceRoller component
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.4
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "backOut" }
+    }
+  };
 
   return (
     <div className="events-container events-black-bg">
       <ParticlesBackground />
-      
-      <DiceRoller category="flagship" />
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+      >
+        <DiceRoller category="flagship" />
+      </motion.div>
 
       <div className="event-list-container">
-        <div className="event-list-header">
+        <motion.div
+          className="event-list-header"
+          initial="hidden"
+          animate="visible"
+          variants={headerVariants}
+        >
           <h1 className="event-list-title stranger-font">FLAGSHIP EVENTS</h1>
           <p className="event-list-description">The Main Gate.</p>
-        </div>
+        </motion.div>
 
-        {/* ðŸ”¥ 3-column grid */}
-        <div
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
@@ -67,8 +107,9 @@ const Flagship = () => {
           }}
         >
           {flagshipEvents.map((event, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
             >
               <EventCard
                 name={event.name}
@@ -77,9 +118,9 @@ const Flagship = () => {
                 image={event.image}
                 onClick={() => handleEventClick(event.name)}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

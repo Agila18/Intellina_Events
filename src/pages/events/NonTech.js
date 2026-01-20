@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import './events.css';
 import ParticlesBackground from '../../components/ParticlesBackground';
-
 
 const NonTech = () => {
   const navigate = useNavigate();
@@ -18,8 +18,7 @@ const NonTech = () => {
     },
     {
       name: 'Neuro Quest',
-      // ... (content is preserved, just showing changed top part)
-      slug: 'neuroquest', // âœ… FIX HERE
+      slug: 'neuroquest',
       tagline: 'Test Your Mind, Challenge Your Logic & Decode The Mysteries',
       prize: 'Rs. 45,000 *',
       image: '/assets/images/NeuroQuest.jpeg'
@@ -54,39 +53,81 @@ const NonTech = () => {
     }
   ];
 
-
   const handleEventClick = (slug) => {
     navigate(`/events/non-tech/${slug}`);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3
+      }
+    }
+  };
 
-  // Dice logic is now handled internally by DiceRoller component
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "backOut" }
+    }
+  };
 
   return (
     <div className="events-container events-black-bg">
       <ParticlesBackground />
 
-      <DiceRoller category="non-tech" />
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+      >
+        <DiceRoller category="non-tech" />
+      </motion.div>
 
       <div className="event-list-container">
-        <div className="event-list-header">
+        <motion.div
+          className="event-list-header"
+          initial="hidden"
+          animate="visible"
+          variants={headerVariants}
+        >
           <h1 className="event-list-title stranger-font">NON-TECH EVENTS</h1>
           <p className="event-list-description">Think. Play. Survive.</p>
-        </div>
+        </motion.div>
 
-        <div className="event-grid">
+        <motion.div
+          className="event-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {events.map((event, index) => (
-            <EventCard
-              key={index}
-              name={event.name}
-              tagline={event.tagline}
-              prize={event.prize}
-              image={event.image}
-              onClick={() => handleEventClick(event.slug)}
-            />
-
+            <motion.div key={index} variants={itemVariants}>
+              <EventCard
+                key={index}
+                name={event.name}
+                tagline={event.tagline}
+                prize={event.prize}
+                image={event.image}
+                onClick={() => handleEventClick(event.slug)}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
