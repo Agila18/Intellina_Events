@@ -18,15 +18,15 @@ const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleTex
     }
 
     setIsTransmitting(true);
-    // Navigation happens after WalkieTalkie reports completion
+
+    // Navigate at exactly 7 seconds after clicking
+    setTimeout(() => {
+      navigate(route);
+    }, 7000);
   };
 
   const handleTransmissionComplete = () => {
-    // Navigate at 6.8 seconds after card click for click audio, or use default timing
-    const delay = clickAudioSrc ? 5500 : 500;
-    setTimeout(() => {
-      navigate(route);
-    }, delay);
+    // No longer handling navigation here as it's now precisely 7s from click
   };
 
   const handleKeyPress = (event) => {
