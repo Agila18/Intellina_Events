@@ -63,6 +63,7 @@ const Events = () => {
               character={voiceLines.technical.character}
               audioSrc={voiceLines.technical.audio}
               subtitleText={voiceLines.technical.subtitle}
+              clickAudioSrc="/assets/audio/Dustin_Technical_audio.mpeg"
             />
 
             <CategoryCard
