@@ -46,7 +46,7 @@ const Flagship = () => {
   return (
     <div className="events-container events-black-bg">
       <ParticlesBackground />
-
+      
       <DiceRoller category="flagship" />
 
       <div className="event-list-container">

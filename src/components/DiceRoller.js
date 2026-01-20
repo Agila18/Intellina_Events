@@ -19,6 +19,9 @@ const DiceRoller = ({ category = 'technical' }) => {
     const [showPrompt, setShowPrompt] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isCentering, setIsCentering] = useState(false);
+    const [countdown, setCountdown] = useState(null);
+    const [isShaking, setIsShaking] = useState(false);
+    const [showTyping, setShowTyping] = useState(false);
     const timeoutRef = useRef(null);
 
     useEffect(() => {
@@ -53,14 +56,46 @@ const DiceRoller = ({ category = 'technical' }) => {
                 const face = randomFace();
                 setCurrentFace(face);
                 setIsRolling(false);
+                setIsCentering(true); // Hold centered
 
-                // Randomly select an event from the category using the centralized data
-                const categoryEvents = flattenedEvents.filter(e => e.category === category);
-                if (categoryEvents.length > 0) {
-                    const randomEvent = categoryEvents[Math.floor(Math.random() * categoryEvents.length)];
-                    setSelectedEvent(randomEvent);
-                    setShowResult(true);
-                }
+                // Stage 3: Dramatic Reveal Sequence
+                timeoutRef.current = setTimeout(() => {
+                    // Step 1: 3-2-1 Countdown
+                    setCountdown(3);
+
+                    const countdownInterval = setInterval(() => {
+                        setCountdown(prev => {
+                            if (prev === 1) {
+                                clearInterval(countdownInterval);
+                                // Step 2: Typing Animation
+                                setTimeout(() => {
+                                    setCountdown(null);
+                                    setShowTyping(true);
+
+                                    // Step 3: Screen Shake and Reveal
+                                    setTimeout(() => {
+                                        setIsShaking(true);
+                                        setTimeout(() => {
+                                            setIsShaking(false);
+                                            setShowTyping(false);
+                                            setIsCentering(false);
+
+                                            // Final Reveal
+                                            const categoryEvents = flattenedEvents.filter(e => e.category === category);
+                                            if (categoryEvents.length > 0) {
+                                                const randomEvent = categoryEvents[Math.floor(Math.random() * categoryEvents.length)];
+                                                setSelectedEvent(randomEvent);
+                                                setShowResult(true);
+                                            }
+                                        }, 800);
+                                    }, 2000); // Wait for typing
+                                }, 1000);
+                                return 1;
+                            }
+                            return prev - 1;
+                        });
+                    }, 1000);
+                }, 200);
             }, 1000);
         }, 600);
     };
@@ -248,16 +283,87 @@ const DiceRoller = ({ category = 'technical' }) => {
           from { transform: scale(0.8); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
+        @keyframes borderPulse {
+          0%, 100% { border-color: rgba(255, 43, 43, 0.6); box-shadow: 0 0 30px rgba(255, 0, 0, 0.2); }
+          50% { border-color: rgba(255, 43, 43, 1); box-shadow: 0 0 60px rgba(255, 0, 0, 0.5); }
+        }
+        @keyframes rotateDie {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes portalSwirl {
+          from { transform: rotate(0deg) scale(0.8); opacity: 0.3; }
+          50% { transform: rotate(180deg) scale(1.1); opacity: 0.6; }
+          to { transform: rotate(360deg) scale(0.8); opacity: 0.3; }
+        }
+        @keyframes shake {
+          0%, 100% { transform: translate(0, 0); }
+          10%, 30%, 50%, 70%, 90% { transform: translate(-15px, -8px); }
+          20%, 40%, 60%, 80% { transform: translate(15px, 8px); }
+        }
+        @keyframes countdownPop {
+          0% { transform: scale(4); opacity: 0; filter: blur(10px); }
+          50% { transform: scale(1); opacity: 1; filter: blur(0px); }
+          100% { transform: scale(0.2); opacity: 0; filter: blur(5px); }
+        }
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+        @keyframes blink {
+          50% { border-color: transparent }
+        }
+        @keyframes dieImplode {
+          0% { transform: scale(1.5); opacity: 1; }
+          100% { transform: scale(4); opacity: 0; filter: blur(20px); }
+        }
+        .animate-shake {
+          animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        .countdown-number {
+          animation: countdownPop 1s ease-in-out forwards;
+        }
+        .typing-text {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 4px solid #ff1a1a;
+          animation: typing 1.5s steps(20, end) forwards, blink 0.5s step-end infinite;
+        }
+        .die-implode {
+          animation: dieImplode 0.8s ease-out forwards;
+        }
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out;
         }
         .animate-scaleIn {
           animation: scaleIn 0.4s ease-out;
         }
+        .modal-border-pulse {
+          animation: borderPulse 3s ease-in-out infinite;
+        }
+        .die-icon-rotate {
+          animation: rotateDie 10s linear infinite;
+        }
+        .portal-swirl {
+          animation: portalSwirl 6s linear infinite;
+        }
+        .energy-charge::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 0;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: none;
+        }
+        .energy-charge:hover::before {
+          animation: energyFill 0.8s ease-out forwards;
+        }
       `}</style>
 
             {/* Dice Tooltip Prompt */}
-            {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && (
+            {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && countdown === null && !showTyping && (
                 <div className="fixed bottom-[180px] right-[40px] z-[60] animate-fadeIn pointer-events-none">
                     <div className="bg-black text-white px-5 py-3 rounded-xl border border-red-500/50 shadow-[0_0_20px_rgba(255,0,0,0.4)] relative">
                         <p className="text-sm font-bold tracking-wider uppercase">Tap Your Lucky Event!</p>
@@ -267,9 +373,29 @@ const DiceRoller = ({ category = 'technical' }) => {
                 </div>
             )}
 
+            {/* Countdown Overlay */}
+            {countdown !== null && (
+                <div className="fixed inset-0 flex items-center justify-center z-[110] pointer-events-none">
+                    <div key={countdown} className="text-[200px] font-black text-[#ff1a1a] countdown-number"
+                        style={{ fontFamily: "'Orbitron', sans-serif", textShadow: '0 0 50px rgba(255,0,0,0.8)' }}>
+                        {countdown}
+                    </div>
+                </div>
+            )}
+
+            {/* Typing Reveal Overlay */}
+            {showTyping && (
+                <div className="fixed inset-0 flex flex-col items-center justify-center z-[110] pointer-events-none">
+                    <div className="typing-text text-3xl font-black text-white uppercase tracking-[0.5em] mb-4 shadow-[0_0_30px_rgba(255,0,0,0.3)]"
+                        style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                        Your Lucky event is...
+                    </div>
+                </div>
+            )}
+
             {/* Dice in bottom right corner */}
             <div
-                className={`dice-container ${(isRolling || isCentering) ? 'centered' : ''}`}
+                className={`dice-container ${(isRolling || isCentering || countdown !== null || showTyping) ? 'centered' : ''} ${isShaking ? 'animate-shake' : ''} ${isShaking ? 'die-implode' : ''}`}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
@@ -289,39 +415,75 @@ const DiceRoller = ({ category = 'technical' }) => {
 
             {/* Result Modal */}
             {showResult && selectedEvent && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 animate-fadeIn">
-                    <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-purple-500 shadow-2xl animate-scaleIn">
-                        <div className="text-center">
-                            <div className="text-yellow-400 text-5xl mb-4">🎲</div>
-                            <h2 className="text-white text-2xl font-bold mb-2">Your Lucky Event is:</h2>
-                            <h3 className="text-yellow-300 text-3xl font-extrabold mb-4">{selectedEvent.title}</h3>
-                            <div className="flex flex-col gap-2 mb-6">
-                                <div className="flex items-center justify-between bg-white bg-opacity-5 rounded-lg px-4 py-2 border border-white/10">
-                                    <span className="text-gray-400 text-xs uppercase tracking-widest">Portal Level</span>
-                                    <span className="text-red-500 font-bold uppercase text-xs">Critical</span>
-                                </div>
-                                <div className="flex items-center justify-between bg-white bg-opacity-5 rounded-lg px-4 py-2 border border-white/10">
-                                    <span className="text-gray-400 text-xs uppercase tracking-widest">Status</span>
-                                    <span className="text-green-500 font-bold uppercase text-xs">Highly Recommended</span>
+                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[100] animate-fadeIn backdrop-blur-xl">
+                    {/* Vignette Spotlight Effect */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.8)_100%)] pointer-events-none"></div>
+
+                    <div className="bg-[#080808] rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-[#ff2b2b]/60 modal-border-pulse animate-scaleIn relative overflow-hidden">
+                        {/* Internal Atmospheric Glow */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,0,0,0.1),transparent_70%)] pointer-events-none"></div>
+
+                        <div className="text-center relative z-10">
+                            {/* Rotating/Hover-reactive Die */}
+                            <div className="relative inline-block mb-6 group/die">
+                                <div className="absolute inset-0 bg-red-600/20 blur-2xl rounded-full opacity-0 group-hover/die:opacity-100 transition-opacity duration-500"></div>
+                                <div className="text-6xl die-icon-rotate cursor-help transition-transform duration-500 group-hover/die:scale-125 drop-shadow-[0_0_20px_rgba(255,0,0,0.5)]">
+                                    🎲
                                 </div>
                             </div>
-                            <p className="text-gray-300 text-sm mb-6 leading-relaxed italic">"{selectedEvent.description}"</p>
-                            <div className="bg-red-600 bg-opacity-20 border border-red-500 rounded-xl p-4 mb-8">
-                                <p className="text-white text-xs uppercase tracking-widest mb-1 opacity-70">Prizes Worth</p>
-                                <p className="text-red-400 text-3xl font-black">₹ {selectedEvent.prizes} *</p>
+
+                            <h2 className="text-gray-500 text-xs uppercase tracking-[0.5em] font-bold mb-3 opacity-80">Sync Complete</h2>
+
+                            <h3 className="text-white text-4xl mb-6 uppercase tracking-tighter leading-none"
+                                style={{
+                                    fontFamily: "'Orbitron', sans-serif",
+                                    fontWeight: 900,
+                                    textShadow: '0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.4)'
+                                }}>
+                                {selectedEvent.title}
+                            </h3>
+
+                            <div className="flex flex-col gap-3 mb-8">
+                                <div className="flex items-center justify-between bg-white/5 rounded-lg px-4 py-2 border border-white/10">
+                                    <span className="text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">Threat Level</span>
+                                    <span className="text-[#ff2b2b] font-black uppercase text-xs tracking-widest animate-pulse drop-shadow-[0_0_5px_rgba(255,0,0,0.5)]">Critical</span>
+                                </div>
                             </div>
-                            <div className="flex gap-3">
+
+                            <p className="text-gray-400 text-sm mb-8 leading-relaxed italic border-l-2 border-[#ff2b2b]/40 pl-4 text-left font-medium">
+                                "{selectedEvent.description}"
+                            </p>
+
+                            {/* Prize Section (Simplified - Breakdown Removed) */}
+                            <div className="bg-red-950/10 border border-[#ff2b2b]/30 rounded-xl p-5 mb-8 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/5 blur-3xl rounded-full pointer-events-none"></div>
+
+                                <div className="relative z-10">
+                                    <p className="text-[#ff2b2b] text-[10px] uppercase tracking-[0.3em] mb-1 font-bold">Total Prizes Worth</p>
+                                    <p className="text-white text-3xl font-black tracking-tighter" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                                        ₹ {selectedEvent.prizes} <span className="text-[#ff2b2b]">*</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-4">
                                 <button
                                     onClick={handleViewDetails}
-                                    className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                    className="flex-[2] relative overflow-hidden bg-[#ff1a1a] text-white font-black uppercase tracking-[0.2em] py-4 px-6 rounded-lg transition-all duration-300 transform group/btn active:scale-95 shadow-[0_0_30px_rgba(255,0,0,0.3)] energy-charge"
+                                    style={{ fontSize: '11px' }}
                                 >
-                                    View Details
+                                    {/* Portal Swirl behind button on hover */}
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 pointer-events-none">
+                                        <div className="w-48 h-48 bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.4),transparent)] rounded-full portal-swirl blur-sm"></div>
+                                    </div>
+                                    <span className="relative z-10 group-hover/btn:scale-110 transition-transform">Enter Portal</span>
                                 </button>
                                 <button
                                     onClick={() => setShowResult(false)}
-                                    className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+                                    className="flex-1 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-bold uppercase tracking-[0.1em] py-4 px-6 rounded-lg transition-all duration-300 border border-white/10"
+                                    style={{ fontSize: '11px' }}
                                 >
-                                    Close
+                                    Abort
                                 </button>
                             </div>
                         </div>
