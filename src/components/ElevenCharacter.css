@@ -1,0 +1,533 @@
+/* ==================== ELEVEN CHARACTER STYLING ==================== */
+
+.eleven-character {
+    width: 300px;
+    height: 450px;
+    position: relative;
+    z-index: 5;
+    filter: drop-shadow(0 10px 30px rgba(109, 213, 237, 0.3));
+    animation: elevenFloat 6s ease-in-out infinite;
+}
+
+/* Levitation Float Animation */
+@keyframes elevenFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Duration: 6s, creates gentle hovering effect */
+
+/* Breathing Animation for torso */
+.tank-top {
+    animation: breathe 3.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scaleY(1.0);
+    }
+
+    50% {
+        transform: scaleY(1.03);
+    }
+}
+
+/* Affects torso area only, subtle vertical expansion */
+
+/* Psychic Aura Pulse */
+.psychic-aura {
+    animation: auraPulse 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes auraPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        stroke-width: 2;
+    }
+
+    50% {
+        opacity: 0.6;
+        stroke-width: 3;
+    }
+}
+
+/* State-based styling */
+.eleven-character.meditating .psychic-aura {
+    opacity: 0.4;
+}
+
+.eleven-character.disturbed {
+    animation: elevenShake 0.3s ease-in-out;
+}
+
+@keyframes elevenShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+
+    75% {
+        transform: translateX(5px) rotate(2deg);
+    }
+}
+
+.eleven-character.awakening .psychic-aura {
+    animation: auraIntensify 2s ease-in-out forwards;
+}
+
+@keyframes auraIntensify {
+    0% {
+        opacity: 0.4;
+        stroke-width: 2;
+    }
+
+    100% {
+        opacity: 0.9;
+        stroke-width: 5;
+    }
+}
+
+.eleven-character.conscious {
+    filter: drop-shadow(0 10px 50px rgba(109, 213, 237, 0.8));
+}
+
+.eleven-character.revealing {
+    animation: elevenRise 3s ease-out forwards;
+}
+
+@keyframes elevenRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Hair weightlessness movement */
+.hair {
+    animation: hairFloat 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes hairFloat {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(0.5px) rotate(0.3deg);
+    }
+
+    50% {
+        transform: translateX(-0.5px) rotate(-0.3deg);
+    }
+
+    75% {
+        transform: translateX(0.3px) rotate(0.2deg);
+    }
+}
+
+/* Subtle sway, barely noticeable, simulates weightlessness */
+
+/* Blindfold ribbon ends movement */
+.blindfold-ribbon {
+    animation: ribbonFloat 5s ease-in-out infinite;
+    transform-origin: left center;
+}
+
+@keyframes ribbonFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    30% {
+        transform: translateY(-1px) rotate(2deg);
+    }
+
+    70% {
+        transform: translateY(1px) rotate(-1.5deg);
+    }
+}
+
+/* Gentle float/sway, offset timing from hair for natural movement */
+
+/* ==================== PSYCHIC AURA EFFECTS ==================== */
+
+/* Psychic body glow - pulse animation synchronized with breathing */
+.psychic-body-glow {
+    animation: bodyGlowPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes bodyGlowPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+}
+
+/* Synchronized with breathing (3.5s) for cohesive energy field */
+
+/* Sacred geometry rotation (very slow) */
+.sacred-geometry {
+    animation: geometryRotate 30s linear infinite;
+    transform-origin: 100px 150px;
+}
+
+@keyframes geometryRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Slow 30s rotation creates subtle, mystical effect */
+
+/* Individual geometry elements can have offset animations */
+.geometry-circle.outer {
+    animation: geometryRotate 30s linear infinite;
+    transform-origin: 100px 150px;
+}
+
+.geometry-circle.inner {
+    animation: geometryRotate 25s linear infinite reverse;
+    transform-origin: 100px 150px;
+}
+
+/* Inner circle rotates opposite direction for dynamic effect */
+
+/* Hands gentle glow when conscious */
+.eleven-character.conscious .left-hand,
+.eleven-character.conscious .right-hand {
+    filter: drop-shadow(0 0 8px rgba(109, 213, 237, 0.6));
+    animation: handGlow 2s ease-in-out infinite;
+}
+
+@keyframes handGlow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Telekinesis Animations */
+.eleven-character.anim-head-tilt .head {
+    animation: headTilt 0.3s ease-out forwards;
+}
+
+@keyframes headTilt {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(10deg);
+    }
+}
+
+.eleven-character.anim-hand-raise .right-arm,
+.eleven-character.anim-hand-raise .right-hand {
+    animation: handRaise 0.5s ease-out forwards;
+    transform-origin: 125px 135px;
+    /* Shoulder area for arm */
+}
+
+@keyframes handRaise {
+    0% {
+        transform: rotate(0deg) translateY(0);
+    }
+
+    100% {
+        transform: rotate(-20deg) translateY(-10px);
+    }
+}
+
+/* Return to rest */
+.eleven-character.anim-rest .head {
+    animation: headReturn 1s ease-in-out forwards;
+}
+
+@keyframes headReturn {
+    from {
+        transform: rotate(10deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.eleven-character.anim-rest .right-arm,
+.eleven-character.anim-rest .right-hand {
+    animation: handLower 1s ease-in-out forwards;
+    transform-origin: 125px 135px;
+}
+
+@keyframes handLower {
+    from {
+        transform: rotate(-20deg) translateY(-10px);
+    }
+
+    to {
+        transform: rotate(0deg) translateY(0);
+    }
+}
+
+/* ==================== STATE-BASED ANIMATIONS (ElevenReveal.js) ==================== */
+
+/* Eyes Glow */
+.eleven-character.anim-eyes-glow .eye-glow {
+    opacity: 1 !important;
+    transition: opacity 0.5s ease;
+}
+
+.eleven-character.anim-eyes-glow .blindfold {
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+}
+
+/* Sharp Breath */
+.eleven-character.anim-sharp-breath .tank-top {
+    animation: breatheSharp 0.3s ease-in-out forwards;
+}
+
+@keyframes breatheSharp {
+    0% {
+        transform: scaleY(1);
+    }
+
+    100% {
+        transform: scaleY(1.08);
+    }
+}
+
+/* Psychic Burst */
+.eleven-character.anim-psychic-burst {
+    animation: elevenShake 0.4s ease-in-out;
+    filter: drop-shadow(0 0 40px var(--energy-glow));
+}
+
+/* Hair Lift */
+.eleven-character.anim-hair-lift .hair {
+    animation: hairFloatActive 2s ease-in-out infinite;
+}
+
+/* Arms Raise Power */
+.eleven-character.anim-arms-raise-power .left-arm,
+.eleven-character.anim-arms-raise-power .left-hand {
+    animation: armRaiseLeftPower 1s ease-out forwards;
+}
+
+.eleven-character.anim-arms-raise-power .right-arm,
+.eleven-character.anim-arms-raise-power .right-hand {
+    animation: armRaiseRightPower 1s ease-out forwards;
+}
+
+@keyframes armRaiseLeftPower {
+    to {
+        transform: rotate(40deg) translateX(-15px) translateY(-10px);
+        transform-origin: 75px 135px;
+    }
+}
+
+@keyframes armRaiseRightPower {
+    to {
+        transform: rotate(-40deg) translateX(15px) translateY(-10px);
+        transform-origin: 125px 135px;
+    }
+}
+
+/* Stand Up */
+.eleven-character.anim-stand-up {
+    animation: standUpCharacter 1s ease-out forwards;
+}
+
+.eleven-character.anim-stand-up .leg-sitting {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.eleven-character.anim-stand-up .stand-leg {
+    opacity: 1 !important;
+    transition: opacity 0.3s ease 0.2s;
+}
+
+@keyframes standUpCharacter {
+    to {
+        transform: translateY(-50px);
+    }
+}
+
+/* Arms Extend (Success Sequence Step 2) */
+.eleven-character.anim-arms-extend .left-arm,
+.eleven-character.anim-arms-extend .left-hand {
+    animation: armsExtendLeft 1s ease-out forwards;
+}
+
+.eleven-character.anim-arms-extend .right-arm,
+.eleven-character.anim-arms-extend .right-hand {
+    animation: armsExtendRight 1s ease-out forwards;
+}
+
+@keyframes armsExtendLeft {
+    to {
+        transform: rotate(0deg) translateX(-20px) translateY(-30px);
+        transform-origin: 75px 135px;
+    }
+}
+
+@keyframes armsExtendRight {
+    to {
+        transform: rotate(0deg) translateX(20px) translateY(-30px);
+        transform-origin: 125px 135px;
+    }
+}
+
+/* Awakened Idle State */
+.eleven-character.awakened-idle {
+    animation: elevenFloatAwakened 4s ease-in-out infinite;
+}
+
+@keyframes elevenFloatAwakened {
+
+    0%,
+    100% {
+        transform: translateY(-12px);
+    }
+
+    50% {
+        transform: translateY(-16px);
+    }
+}
+
+.eleven-character.awakened-idle .tank-top {
+    animation: breathePronounced 2.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes breathePronounced {
+
+    0%,
+    100% {
+        transform: scaleY(1.0);
+    }
+
+    50% {
+        transform: scaleY(1.06);
+    }
+}
+
+.eleven-character.awakened-idle .hair {
+    animation: hairFloatActive 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes hairFloatActive {
+
+    0%,
+    100% {
+        transform: translateY(-10px) scaleY(1.1) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-13px) scaleY(1.15) rotate(1deg);
+    }
+}
+
+/* Arms in power pose */
+.eleven-character.awakened-idle .left-arm,
+.eleven-character.awakened-idle .left-hand {
+    transform: rotate(40deg) translateX(-15px) translateY(-10px);
+    transform-origin: 75px 135px;
+}
+
+.eleven-character.awakened-idle .right-arm,
+.eleven-character.awakened-idle .right-hand {
+    transform: rotate(-40deg) translateX(15px) translateY(-10px);
+    transform-origin: 125px 135px;
+}
+
+/* Intensified Aura and Geometry */
+.eleven-character.awakened-idle .psychic-aura {
+    animation: auraPulseFast 1.5s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes auraPulseFast {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+        stroke-width: 4;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+        stroke-width: 6;
+    }
+}
+
+.eleven-character.awakened-idle .sacred-geometry {
+    animation: geometryRotate 15s linear infinite;
+}
+
+/* Support standing stance */
+.eleven-character.awakened-idle .left-leg-sitting,
+.eleven-character.awakened-idle .right-leg-sitting {
+    display: none;
+}
+
+.eleven-character.awakened-idle .stand-leg {
+    opacity: 1;
+}
+
+.eleven-character.awakened-idle .blindfold {
+    opacity: 0.6;
+}
+
+.eleven-character.awakened-idle .eye-glow {
+    opacity: 1;
+    transform: scale(1.2);
+}

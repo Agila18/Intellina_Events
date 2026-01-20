@@ -1,0 +1,97 @@
+/* Eggo Waffle Component Styles */
+
+.eggo-waffle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: transform 0.1s ease-out, filter 0.2s ease-out;
+    will-change: transform, left, top;
+    z-index: 100;
+}
+
+/* Dragging state */
+.eggo-waffle.dragging {
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+    z-index: 200;
+}
+
+/* Flying state */
+.eggo-waffle.flying {
+    filter: drop-shadow(0 4px 12px rgba(212, 165, 116, 0.6));
+    transition: none;
+    /* Remove transition during physics animation */
+}
+
+/* Default state */
+.eggo-waffle:not(.dragging):not(.flying) {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.eggo-waffle:not(.dragging):not(.flying):hover {
+    transform: scale(1.08) !important;
+    filter: brightness(1.1) drop-shadow(0 8px 20px rgba(74, 144, 226, 0.6)) drop-shadow(0 0 30px rgba(109, 213, 237, 0.5));
+    cursor: grab;
+}
+
+/* Tooltip */
+.waffle-tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: tooltipBounce 2s ease-in-out infinite;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+.waffle-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.8);
+}
+
+@keyframes tooltipBounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* SVG animations */
+.eggo-waffle svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.eggo-waffle.dragging svg {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Disable text selection and image dragging */
+.eggo-waffle * {
+    user-select: none;
+    -webkit-user-drag: none;
+}

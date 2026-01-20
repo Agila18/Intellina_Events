@@ -10,6 +10,7 @@ import Technical from "./pages/events/Technical";
 import NonTech from "./pages/events/NonTech";
 import Flagship from "./pages/events/Flagship";
 import EventDescription from "./components/EventDescription";
+import ElevenReveal from "./components/ElevenReveal";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="members" element={<Members />} />
         <Route path="contact" element={<Contact />} />
+
+        {/* Test route for Eleven component */}
+        <Route path="eleven-test" element={<ElevenReveal />} />
       </Route>
     </Routes>
   );
