@@ -92,9 +92,15 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle }) =
         <div className={`walkie-talkie-container ${isActive ? 'active' : ''}`}>
             <div className="walkie-body">
                 <div className="antenna"></div>
+                <div className="signal-bars">
+                    <div className="bar"></div>
+                    <div className="bar"></div>
+                    <div className="bar"></div>
+                </div>
                 <div className="speaker-grill"></div>
                 <div className={`led-indicator ${status === 'transmitting' ? 'on' : ''}`}></div>
                 <div className="brand-label">StrangerCom</div>
+                <div className={`ptt-button ${status === 'transmitting' ? 'pressed' : ''}`}></div>
             </div>
 
             {showSubtitle && (

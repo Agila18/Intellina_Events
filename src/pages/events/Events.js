@@ -1,6 +1,7 @@
 import React from 'react';
 import CategoryCard from '../../components/CategoryCard';
 import './events.css';
+
 const Events = () => {
   const voiceLines = {
     technical: {
@@ -23,6 +24,17 @@ const Events = () => {
   return (
     <>
       <div className="events-container">
+        {/* Upside Down Atmosphere */}
+        <div className="upside-down-particles">
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+          <div className="spore"></div>
+        </div>
+        <div className="fog-layer"></div>
+
         {/* Overlay Content */}
         <div className="events-landing">
           <h1 className="events-landing-title stranger-font typing">
@@ -61,6 +73,7 @@ const Events = () => {
               subtitleText={voiceLines.flagship.subtitle}
             />
           </div>
+
         </div>
       </div>
     </>

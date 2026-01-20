@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import EventCard from '../../components/EventCard';
+import DiceRoller from '../../components/DiceRoller';
 import './events.css';
 import ParticlesBackground from '../../components/ParticlesBackground';
 
@@ -59,9 +60,13 @@ const NonTech = () => {
   };
 
 
+  // Dice logic is now handled internally by DiceRoller component
+
   return (
     <div className="events-container events-black-bg">
       <ParticlesBackground />
+
+      <DiceRoller category="non-tech" />
 
       <div className="event-list-container">
         <div className="event-list-header">
