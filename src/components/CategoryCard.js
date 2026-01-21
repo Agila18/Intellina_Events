@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WalkieTalkie from './WalkieTalkie';
 
-const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleText, clickAudioSrc }) => {
+const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleText, clickAudioSrc, onReadyToNavigate }) => {
   const navigate = useNavigate();
   const [isTransmitting, setIsTransmitting] = useState(false);
 
@@ -21,7 +21,11 @@ const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleTex
 
     // Navigate at exactly 7 seconds after clicking
     setTimeout(() => {
-      navigate(route);
+      if (onReadyToNavigate) {
+        onReadyToNavigate(route);
+      } else {
+        navigate(route);
+      }
     }, 7000);
   };
 

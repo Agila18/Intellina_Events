@@ -130,50 +130,59 @@ const ElevenCharacter = ({ elevenState, animationState }) => {
                 opacity="0.4"
             />
 
-            {/* BLINDFOLD */}
-            <rect
-                className="blindfold"
-                x="65"
-                y="75"
-                width="70"
-                height="15"
-                rx="3"
-                fill="#1a202c"
-            />
+            {/* BLINDFOLD - Hidden when conscious */}
+            {(elevenState !== 'conscious' && elevenState !== 'revealing') && (
+                <>
+                    <rect
+                        className="blindfold"
+                        x="65"
+                        y="75"
+                        width="70"
+                        height="15"
+                        rx="3"
+                        fill="#1a202c"
+                    />
+                    <circle
+                        className="blindfold-knot"
+                        cx="135"
+                        cy="82"
+                        r="5"
+                        fill="#1a202c"
+                    />
+                    <path
+                        className="blindfold-ribbon"
+                        d="M 135 87 Q 145 90, 148 95 Q 150 98, 149 102"
+                        stroke="#1a202c"
+                        strokeWidth="3"
+                        fill="none"
+                        strokeLinecap="round"
+                    />
+                    <path
+                        className="blindfold-ribbon"
+                        d="M 135 88 Q 142 92, 144 98 Q 145 102, 143 106"
+                        stroke="#0a0f1a"
+                        strokeWidth="2.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        opacity="0.8"
+                    />
+                </>
+            )}
 
-            {/* Blindfold knot (back of head) */}
-            <circle
-                className="blindfold-knot"
-                cx="135"
-                cy="82"
-                r="5"
-                fill="#1a202c"
-            />
-
-            {/* Blindfold ribbon ends (trailing fabric) */}
-            <path
-                className="blindfold-ribbon"
-                d="M 135 87 Q 145 90, 148 95 Q 150 98, 149 102"
-                stroke="#1a202c"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-            />
-            <path
-                className="blindfold-ribbon"
-                d="M 135 88 Q 142 92, 144 98 Q 145 102, 143 106"
-                stroke="#0a0f1a"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                opacity="0.8"
-            />
-
-            {/* EYE GLOW (revealed on awakening) */}
-            <g className="eye-glow" style={{ opacity: 0 }}>
-                <circle cx="84" cy="80" r="4" fill="#6dd5ed" filter="url(#eye-glow-filter)" />
-                <circle cx="116" cy="80" r="4" fill="#6dd5ed" filter="url(#eye-glow-filter)" />
-            </g>
+            {/* EYES - Hidden when meditating, visible when conscious */}
+            {(elevenState === 'conscious' || elevenState === 'revealing') ? (
+                <g className="eyes-open">
+                    <circle cx="84" cy="80" r="5" fill="#1a202c" />
+                    <circle cx="116" cy="80" r="5" fill="#1a202c" />
+                    <circle cx="85" cy="79" r="1.5" fill="white" />
+                    <circle cx="117" cy="79" r="1.5" fill="white" />
+                </g>
+            ) : (
+                <g className="eye-glow" style={{ opacity: 0 }}>
+                    <circle cx="84" cy="80" r="4" fill="#6dd5ed" filter="url(#eye-glow-filter)" />
+                    <circle cx="116" cy="80" r="4" fill="#6dd5ed" filter="url(#eye-glow-filter)" />
+                </g>
+            )}
 
             {/* Eyes closed peacefully (subtle lines beneath blindfold) */}
             <line

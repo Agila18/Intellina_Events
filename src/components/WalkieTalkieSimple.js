@@ -92,7 +92,14 @@ const WalkieTalkieSimple = ({ onActivate, isUsed, showHint, isFocused, focusStyl
                 cursor: isUsed ? 'not-allowed' : 'pointer',
                 ...(isFocused ? focusStyle : {})
             }}
+            aria-label="Activate walkie-talkie to call Eleven"
+            aria-describedby="walkie-hint"
+            role="button"
+            tabIndex={0}
         >
+            <div id="walkie-hint" className="sr-only">
+                Click to activate Mike's message, or press Enter
+            </div>
             <svg
                 width="60"
                 height="100"

@@ -3,12 +3,12 @@ import './EggoWaffle.css';
 
 const EggoWaffle = ({ onCollisionWithEleven, isLevitating, isFocused, focusStyle }) => {
     const [isDragging, setIsDragging] = useState(false);
-    const [position, setPosition] = useState({ x: 100, y: 400 });
+    const [position, setPosition] = useState({ x: window.innerWidth / 2 - 150, y: window.innerHeight - 150 });
     const [isFlying, setIsFlying] = useState(false);
     const [velocity, setVelocity] = useState({ x: 0, y: 0 });
     const [rotation, setRotation] = useState(0);
 
-    const lastPositionRef = useRef({ x: 100, y: 400 });
+    const lastPositionRef = useRef({ x: window.innerWidth / 2 - 150, y: window.innerHeight - 150 });
     const lastTimeRef = useRef(Date.now());
     const dragStartRef = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef(null);
@@ -102,7 +102,7 @@ const EggoWaffle = ({ onCollisionWithEleven, isLevitating, isFocused, focusStyle
                     }
                     // Reset waffle to original position after a delay
                     setTimeout(() => {
-                        setPosition({ x: 100, y: 400 });
+                        setPosition({ x: window.innerWidth / 2 - 150, y: window.innerHeight - 150 });
                         setVelocity({ x: 0, y: 0 });
                         setRotation(0);
                     }, 500);
@@ -114,7 +114,7 @@ const EggoWaffle = ({ onCollisionWithEleven, isLevitating, isFocused, focusStyle
                     setIsFlying(false);
                     // Reset to original position
                     setTimeout(() => {
-                        setPosition({ x: 100, y: 400 });
+                        setPosition({ x: window.innerWidth / 2 - 150, y: window.innerHeight - 150 });
                         setVelocity({ x: 0, y: 0 });
                         setRotation(0);
                     }, 300);
@@ -178,7 +178,14 @@ const EggoWaffle = ({ onCollisionWithEleven, isLevitating, isFocused, focusStyle
             }}
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
+            aria-label="Throw Eggo waffle at Eleven"
+            aria-describedby="waffle-hint"
+            role="button"
+            tabIndex={0}
         >
+            <div id="waffle-hint" className="sr-only">
+                Drag and release to throw, or press Enter
+            </div>
             <svg
                 width="80"
                 height="80"

@@ -121,7 +121,7 @@ const EventScroll = ({ unfurled, showEvents }) => {
     );
 };
 
-const ElevenReveal = () => {
+const ElevenReveal = ({ onComplete }) => {
     // ==================== STATE MANAGEMENT ====================
 
     // Main progression states
@@ -150,8 +150,9 @@ const ElevenReveal = () => {
     const [showEvents, setShowEvents] = useState(false);
     const [isFadingOut, setIsFadingOut] = useState(false);
 
-    // Keyboard Focus State
-    const [focusedItem, setFocusedItem] = useState(null); // 'waffle' | 'walkie'
+    const [focusedItem, setFocusedItem] = useState('waffle');
+    const [speechMessage, setSpeechMessage] = useState(null);
+    const [speechTimer, setSpeechTimer] = useState(null);
 
     const focusStyle = {
         outline: '3px solid rgba(255, 215, 0, 0.8)',
@@ -159,19 +160,51 @@ const ElevenReveal = () => {
         boxShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
     };
 
-    const KeyboardManager = () => {
+    // Accessibility & Responsiveness Helpers
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const useBreakpoint = () => {
+        const [breakpoint, setBreakpoint] = useState('desktop');
+        useEffect(() => {
+            const updateBreakpoint = () => {
+                if (window.matchMedia('(max-width: 767px)').matches) setBreakpoint('mobile');
+                else if (window.matchMedia('(min-width: 768px) and (max-width: 1023px)').matches) setBreakpoint('tablet');
+                else setBreakpoint('desktop');
+            };
+            updateBreakpoint();
+            window.addEventListener('resize', updateBreakpoint);
+            return () => window.removeEventListener('resize', updateBreakpoint);
+        }, []);
+        return breakpoint;
+    };
+
+    const breakpoint = useBreakpoint();
+
+    const KeyboardControls = () => {
         useEffect(() => {
             const handleKeyPress = (e) => {
-                if (e.key === 'Tab') {
-                    e.preventDefault();
-                    setFocusedItem(prev => {
-                        if (prev === 'waffle') return 'walkie';
-                        if (prev === 'walkie') return 'waffle';
-                        return 'waffle'; // Default start
-                    });
-                } else if (e.key === 'Enter' || e.key === ' ') {
-                    if (focusedItem === 'waffle') handleWaffleCollision();
-                    else if (focusedItem === 'walkie') handleWalkieTalkieClick();
+                switch (e.key) {
+                    case 'Tab':
+                        e.preventDefault();
+                        setFocusedItem(prev => {
+                            if (prev === 'waffle') return 'walkie';
+                            if (prev === 'walkie') return 'skip';
+                            return 'waffle';
+                        });
+                        break;
+                    case 'Enter':
+                    case ' ':
+                        e.preventDefault();
+                        if (focusedItem === 'waffle') handleWaffleCollision();
+                        else if (focusedItem === 'walkie') handleWalkieTalkieClick();
+                        else if (focusedItem === 'skip') handleSkip();
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        handleSkip();
+                        break;
+                    default:
+                        break;
                 }
             };
             window.addEventListener('keydown', handleKeyPress);
@@ -275,12 +308,24 @@ const ElevenReveal = () => {
 
     // ==================== EVENT HANDLERS ====================
 
+    const showSpeech = (message, duration = 3000) => {
+        if (speechTimer) clearTimeout(speechTimer);
+        setSpeechMessage(message);
+        const timer = setTimeout(() => {
+            setSpeechMessage(null);
+        }, duration);
+        setSpeechTimer(timer);
+    };
+
     const handleWaffleCollision = () => {
         if (isInteracting) return;
 
         setIsInteracting(true);
         setElevenState('disturbed');
         setAttempts(prev => prev + 1);
+
+        // Character reaction
+        showSpeech("Nah, 5 more minutes...", 2500);
 
         // Create telekinetic ripple at impact point (center of screen)
         createTelekineticRipple();
@@ -345,6 +390,7 @@ const ElevenReveal = () => {
         // 4. Full awakening sequence (2.5s)
         setTimeout(() => {
             setElevenState('conscious');
+            showSpeech("yeah i am here, explore events", 4000);
             startAwakeningSequence();
         }, 2500);
     };
@@ -536,8 +582,8 @@ const ElevenReveal = () => {
     const triggerTelekinesisSequence = () => {
         console.log("Starting telekinesis sequence...");
 
-        // 1. Head tilt (0-0.3s)
-        setElevenAnimState('head-tilt');
+        // 1. Head tilt (0-0.3s) - REMOVED
+        // setElevenAnimState('head-tilt');
 
         // 2. Hand raise (0.3-0.8s)
         setTimeout(() => {
@@ -545,9 +591,9 @@ const ElevenReveal = () => {
         }, 300);
 
         // 3. Waffle levitation (0.8-1.5s)
-        setTimeout(() => {
-            setWaffleAnimState('levitating');
-        }, 800);
+        // setTimeout(() => {
+        //     setWaffleAnimState('levitating');
+        // }, 800);
 
         // 4. Waffle settles (1.5-2.0s)
         setTimeout(() => {
@@ -621,6 +667,11 @@ const ElevenReveal = () => {
         setTimeout(() => {
             setEventsUnlocked(true);
             setIsFadingOut(true);
+
+            // Call onComplete after fade out animation finished (approx 2s)
+            setTimeout(() => {
+                if (onComplete) onComplete();
+            }, 2000);
         }, 8000);
     };
 
@@ -663,7 +714,11 @@ const ElevenReveal = () => {
     // ==================== RENDER ====================
 
     return (
-        <div className={`eleven-container ${isBursting ? 'bursting' : ''}`}>
+        <div
+            className={`eleven-container ${isBursting ? 'bursting' : ''}`}
+            role="application"
+            aria-label="Wake Up Eleven - Interactive Event Unlock"
+        >
             {isScreenFlashing && <div className="screen-flash" />}
 
             {/* SVG Filter for refined static noise */}
@@ -767,7 +822,16 @@ const ElevenReveal = () => {
             <div className="floor-glow"></div>
 
             {/* Eleven Character */}
-            <div className={`character-container ${isFadingOut ? 'fade-out-sequence' : ''}`}>
+            <div
+                className={`character-container ${isFadingOut ? 'fade-out-sequence' : ''}`}
+                aria-label="Eleven meditating in psychic trance"
+                aria-live="polite"
+                aria-atomic="true"
+            >
+                {elevenState === 'meditating' && <span className="sr-only">Eleven is in deep meditation</span>}
+                {elevenState === 'disturbed' && <span className="sr-only">Eleven stirs slightly</span>}
+                {elevenState === 'conscious' && <span className="sr-only">Eleven is awake and channeling psychic energy</span>}
+
                 <ElevenCharacter
                     elevenState={elevenState}
                     animationState={elevenAnimState}
@@ -794,10 +858,15 @@ const ElevenReveal = () => {
 
             {/* Main Content */}
             <div className={`eleven-scene ${isFadingOut ? 'fade-out-sequence' : ''}`}>
-                <KeyboardManager />
+                <KeyboardControls />
                 {/* Skip Button */}
                 {showHint && !eventsUnlocked && !isInteracting && (
-                    <button className="skip-button" onClick={handleSkip}>
+                    <button
+                        className={`skip-button ${focusedItem === 'skip' ? 'focused' : ''}`}
+                        onClick={handleSkip}
+                        style={focusedItem === 'skip' ? focusStyle : {}}
+                        aria-label="Skip to flagship events"
+                    >
                         Skip to Events →
                     </button>
                 )}
@@ -810,9 +879,16 @@ const ElevenReveal = () => {
                     </div>
                 )}
 
-                <div className="state-indicator" style={{ opacity: 0.3 }}>
+                <div className="state-indicator">
                     State: {elevenState} | Attempts: {attempts}
                 </div>
+
+                {/* Speech Bubble */}
+                {speechMessage && (
+                    <div className="speech-bubble">
+                        {speechMessage}
+                    </div>
+                )}
 
                 {/* Interactive Objects */}
                 <EggoWaffle

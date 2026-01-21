@@ -251,19 +251,7 @@
 }
 
 /* Telekinesis Animations */
-.eleven-character.anim-head-tilt .head {
-    animation: headTilt 0.3s ease-out forwards;
-}
-
-@keyframes headTilt {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(10deg);
-    }
-}
+/* removed headTilt animation */
 
 .eleven-character.anim-hand-raise .right-arm,
 .eleven-character.anim-hand-raise .right-hand {
@@ -283,19 +271,7 @@
 }
 
 /* Return to rest */
-.eleven-character.anim-rest .head {
-    animation: headReturn 1s ease-in-out forwards;
-}
-
-@keyframes headReturn {
-    from {
-        transform: rotate(10deg);
-    }
-
-    to {
-        transform: rotate(0deg);
-    }
-}
+/* removed headReturn animation */
 
 .eleven-character.anim-rest .right-arm,
 .eleven-character.anim-rest .right-hand {

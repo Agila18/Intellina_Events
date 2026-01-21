@@ -1,8 +1,12 @@
 import React from 'react';
 import CategoryCard from '../../components/CategoryCard';
+import ElevenReveal from '../../components/ElevenReveal';
+import { useNavigate } from 'react-router-dom';
 import './events.css';
 
 const Events = () => {
+  const navigate = useNavigate();
+
   const voiceLines = {
     technical: {
       character: 'Dustin',
