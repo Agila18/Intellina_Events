@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import './events.css';
-import ParticlesBackground from '../../components/ParticlesBackground';
+import ParticleNetworkAnimation from '../../components/ParticleNetworkAnimation';
 
 const Flagship = () => {
   const navigate = useNavigate();
@@ -71,8 +71,8 @@ const Flagship = () => {
   };
 
   return (
-    <div className="events-container events-black-bg">
-      <ParticlesBackground />
+    <div className="events-container events-transparent-bg">
+      <ParticleNetworkAnimation />
 
       <motion.div
         initial="hidden"

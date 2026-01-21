@@ -48,6 +48,12 @@ body {
   background-image: none !important;
 }
 
+/* Transparent background for particle network pages */
+.events-transparent-bg {
+  background: transparent !important;
+  background-image: none !important;
+}
+
 /* Animated red/pink neon glow atmosphere */
 .events-container::before {
   content: '';

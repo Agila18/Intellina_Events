@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
+import ParticleNetworkAnimation from '../../components/ParticleNetworkAnimation';
 import './events.css';
-import ParticlesBackground from '../../components/ParticlesBackground';
 
 const Technical = () => {
   const navigate = useNavigate();
@@ -82,8 +82,8 @@ const Technical = () => {
   };
 
   return (
-    <div className="events-container events-black-bg">
-      <ParticlesBackground />
+    <div className="events-container events-transparent-bg">
+      <ParticleNetworkAnimation />
 
       <motion.div
         initial="hidden"
