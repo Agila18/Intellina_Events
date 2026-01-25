@@ -19,7 +19,7 @@ const events = {
 • Judges’ decision is final`,
       dateVenue: "April 4 | M-139, IT-211, IT-212",
       prizes: "5,000",
-      image: "/assets/posters/paperpresentation.jpeg"
+      image: "/assets/posters/paperpresentation.png"
     },
 
     hackathon: {
@@ -38,7 +38,7 @@ const events = {
 • Judging based on innovation and execution`,
       dateVenue: "April 4 – 5 | LBCH, IT-213",
       prizes: "5,000",
-      image: "/assets/posters/Hackathon.jpeg"
+      image: "/assets/posters/Hackathon.png"
     },
 
     rrr: {
@@ -57,7 +57,7 @@ const events = {
 • E-certificates for all participants`,
       dateVenue: "April 4 | M-114",
       prizes: "5,000",
-      image: "/assets/posters/RRR.jpeg"
+      image: "/assets/posters/RRR.png"
     },
 
     "worst-ui": {
@@ -76,7 +76,7 @@ const events = {
 • Submission must include explanation`,
       dateVenue: "April 5 | M-114",
       prizes: "3,000",
-      image: "/assets/posters/WorstUi.jpeg"
+      image: "/assets/posters/WorstUi.png"
     },
 
     "web-design": {
@@ -95,7 +95,7 @@ const events = {
 • Use of templates is not allowed`,
       dateVenue: "April 4 | M-114",
       prizes: "3,000",
-      image: "/assets/posters/WebDesign.jpeg"
+      image: "/assets/posters/WebDesign.pngg"
     },
 
     "project-expo": {
@@ -114,7 +114,7 @@ const events = {
 • Judges evaluate innovation and impact`,
       dateVenue: "April 4 – 5 | Expo Hall",
       prizes: "As per announcement",
-      image: "/assets/posters/ProjectExpo.jpeg"
+      image: "/assets/posters/ProjectExpo.png"
     }
   },
 
@@ -135,7 +135,7 @@ const events = {
 • Submissions must be original`,
       dateVenue: "April 4 | LBCH, IT-213",
       prizes: "5,000",
-      image: "/assets/posters/GPTathon.jpeg"
+      image: "/assets/posters/GPTathon.png"
     },
 
     "open-talent": {
@@ -169,7 +169,7 @@ const events = {
 • Fair play mandatory`,
       dateVenue: "April 5 | Gaming Arena",
       prizes: "As per announcement",
-      image: "/assets/posters/E-Sports.jpeg"
+      image: "/assets/posters/E-Sports.png"
     },
 
     "rapid-chess": {
@@ -204,7 +204,7 @@ const events = {
 • Different challenges in each round`,
       dateVenue: "April 4 | LBCH",
       prizes: "3,000",
-      image: "/assets/posters/BiggBoss.jpeg"
+      image: "/assets/posters/BiggBoss.png"
     },
 
     neuroquest: {
@@ -222,7 +222,7 @@ const events = {
 • No external devices allowed`,
       dateVenue: "April 4 | IT-109, IT-110",
       prizes: "2,000",
-      image: "/assets/posters/NeuroQuest.jpeg"
+      image: "/assets/posters/NeuroQuest.png"
     },
 
     connections: {
@@ -238,7 +238,7 @@ const events = {
 • Time limit: 5 minutes per round`,
       dateVenue: "April 5 | IT-211, IT-212",
       prizes: "2,500",
-      image: "/assets/posters/Connections.jpeg"
+      image: "/assets/posters/Connections.png"
     },
 
     "murder-mystery": {
@@ -255,7 +255,7 @@ const events = {
 • Logical reasoning required`,
       dateVenue: "April 5 | Mystery Zone",
       prizes: "As per announcement",
-      image: "/assets/posters/MurderMystery.jpeg"
+      image: "/assets/posters/MurderMystery.png"
     },
 
     "ipl-auction": {
@@ -273,7 +273,7 @@ const events = {
 • Highest total rating wins`,
       dateVenue: "April 5 | IT-212",
       prizes: "3,000",
-      image: "/assets/posters/IPLAuction.jpeg"
+      image: "/assets/posters/IPLAuction.png"
     },
 
     "treasure-hunt": {
@@ -290,7 +290,7 @@ const events = {
 • No GPS or external tools allowed`,
       dateVenue: "April 4 | IT-109",
       prizes: "2,000",
-      image: "/assets/posters/TreasureHunt.jpeg"
+      image: "/assets/posters/TreasureHunt.png"
     }
   }
 };
