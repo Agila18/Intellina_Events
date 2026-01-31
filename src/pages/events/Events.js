@@ -69,7 +69,14 @@ const Events = () => {
               subtitleText={voiceLines.technical.subtitle}
               clickAudioSrc="/assets/audio/Dustin_Technical_audio.mpeg"
             />
-
+            <CategoryCard
+              title="FLAGSHIP EVENT"
+              subtitle="The Main Gate."
+              route="/events/flagship"
+              character={voiceLines.flagship.character}
+              audioSrc={voiceLines.flagship.audio}
+              subtitleText={voiceLines.flagship.subtitle}
+            />
             <CategoryCard
               title="NON-TECH EVENTS"
               subtitle="Think. Play. Survive."
@@ -79,14 +86,7 @@ const Events = () => {
               subtitleText={voiceLines.nontech.subtitle}
             />
 
-            <CategoryCard
-              title="FLAGSHIP EVENT"
-              subtitle="The Main Gate."
-              route="/events/flagship"
-              character={voiceLines.flagship.character}
-              audioSrc={voiceLines.flagship.audio}
-              subtitleText={voiceLines.flagship.subtitle}
-            />
+
           </div>
 
         </div>
