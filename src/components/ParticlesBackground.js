@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import './ParticleNetworkAnimation.css'; // Reuse CSS for glows
 
 const ParticlesBackground = () => {
     const [init, setInit] = useState(false);
@@ -42,20 +43,20 @@ const ParticlesBackground = () => {
                         quantity: 4,
                     },
                     repulse: {
-                        distance: 100,
+                        distance: 200,
                         duration: 0.4,
                     },
                 },
             },
             particles: {
                 color: {
-                    value: ['#ff0000', '#8B0000', '#b40707ff'], // Red, Dark Red, White
+                    value: ['#e50914', '#ff3333', '#b30710'], // Intellina Red Variants
                 },
                 links: {
-                    color: '#ff0000',
+                    color: '#e50914',
                     distance: 150,
                     enable: true,
-                    opacity: 0.3,
+                    opacity: 0.4,
                     width: 1,
                     triangles: {
                         enable: true,
@@ -80,8 +81,7 @@ const ParticlesBackground = () => {
                         enable: true,
                         area: 800,
                     },
-                    value: 80,
-                    limit: 130,
+                    value: 100,
                 },
                 opacity: {
                     value: { min: 0.3, max: 0.8 },
@@ -114,12 +114,18 @@ const ParticlesBackground = () => {
 
     if (init) {
         return (
-            <Particles
-                id="tsparticles"
-                particlesLoaded={particlesLoaded}
-                options={options}
-                className="absolute inset-0 z-0 pointer-events-none"
-            />
+            <div className="particle-network-animation"> {/* Wrapper to contain glows and particles */}
+                <div className="glow glow-1"></div>
+                <div className="glow glow-2"></div>
+                <div className="glow glow-3"></div>
+                <Particles
+                    id="tsparticles"
+                    particlesLoaded={particlesLoaded}
+                    options={options}
+                    className="absolute inset-0 z-0"
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
+                />
+            </div>
         );
     }
 

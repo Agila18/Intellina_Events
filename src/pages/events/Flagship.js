@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import './events.css';
-import ParticleNetworkAnimation from '../../components/ParticleNetworkAnimation';
+import ParticlesBackground from '../../components/ParticlesBackground';
 
 const Flagship = () => {
   const navigate = useNavigate();
@@ -14,31 +14,21 @@ const Flagship = () => {
       name: 'GPTATHON',
       tagline: 'The Ultimate Challenge: Where Legends Are Made',
       prize: 'Rs. 2,00,000 *',
-      image: '/assets/images/GPTathon.jpeg'
+      image: '/assets/images/GPTathon.jpeg',
+      slug: 'gptathon'
     },
-    {
-      name: 'Open Talent',
-      tagline: 'Showcase Your Skills, Dazzle The Crowd & Shine On Stage',
-      prize: 'Rs. 45,000 *',
-      image: '/assets/images/OpenTalent.jpeg'
-    },
-    {
-      name: 'Rapid Chess',
-      tagline: 'Think Fast, Move Faster & Checkmate Your Opponents',
-      prize: 'Rs. 30,000 *',
-      image: '/assets/images/RapidChess.jpeg'
-    },
+
     {
       name: 'E-sports',
       tagline: 'Battle In Virtual Arenas, Prove Your Gaming Supremacy',
       prize: 'Rs. 70,000 *',
-      image: '/assets/images/E-sports.jpeg'
+      image: '/assets/images/E-sports.jpeg',
+      slug: 'esports'
     }
   ];
 
-  const handleEventClick = (eventName) => {
-    const eventId = eventName.toLowerCase().replace(/\s+/g, '-');
-    navigate(`/events/flagship/${eventId}`);
+  const handleEventClick = (slug) => {
+    navigate(`/events/flagship/${slug}`);
   };
 
   const containerVariants = {
@@ -72,7 +62,7 @@ const Flagship = () => {
 
   return (
     <div className="events-container events-transparent-bg">
-      <ParticleNetworkAnimation />
+      <ParticlesBackground />
 
       <motion.div
         initial="hidden"
@@ -98,12 +88,12 @@ const Flagship = () => {
           initial="hidden"
           animate="visible"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '40px',
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '80px',
             maxWidth: '1400px',
             margin: '60px auto',
-            justifyItems: 'center'
           }}
         >
           {flagshipEvents.map((event, index) => (
@@ -116,7 +106,7 @@ const Flagship = () => {
                 tagline={event.tagline}
                 prize={event.prize}
                 image={event.image}
-                onClick={() => handleEventClick(event.name)}
+                onClick={() => handleEventClick(event.slug)}
               />
             </motion.div>
           ))}

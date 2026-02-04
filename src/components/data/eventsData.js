@@ -95,7 +95,7 @@ const events = {
 • Use of templates is not allowed`,
       dateVenue: "April 4 | M-114",
       prizes: "3,000",
-      image: "/assets/posters/WebDesign.pngg"
+      image: "/assets/posters/WebDesign.png"
     },
 
     "project-expo": {
@@ -291,6 +291,47 @@ const events = {
       dateVenue: "April 4 | IT-109",
       prizes: "2,000",
       image: "/assets/posters/TreasureHunt.png"
+    },
+
+    "object-odyssey": {
+      id: 17,
+      title: "OBJECT ODYSSEY",
+      category: "non-tech",
+      description:
+        "Object Odyssey is a thrilling scavenger hunt that tests observation skills, quick thinking, and the ability to spot hidden objects in complex environments. Participants race to find specific items before time runs out.",
+      stages:
+        `• Object Briefing
+• Timed Search Phase
+• Verification`,
+      rules:
+        `• Solo or team participation (max 3 members)
+• Time limit strictly enforced
+• No external tools or devices allowed
+• Objects must be identified correctly`,
+      dateVenue: "April 5 | Event Arena",
+      prizes: "3,500",
+      image: "/assets/posters/ObjectOdyssey.jpeg"
+    },
+
+    "snap-sense": {
+      id: 18,
+      title: "SNAP SENSE",
+      category: "non-tech",
+      description:
+        "Snap Sense challenges participants to capture the perfect moment through photography based on given themes. It tests creativity, timing, and the ability to tell stories through visual composition.",
+      stages:
+        `• Theme Announcement
+• Photography Session
+• Submission & Judging`,
+      rules:
+        `• Solo participation
+• Use your own device (smartphone/camera)
+• Photos must be original, taken during the event
+• No editing beyond basic filters
+• Theme-based photography challenges`,
+      dateVenue: "April 5 | Campus Wide",
+      prizes: "2,500",
+      image: "/assets/posters/SnapSense.jpeg"
     }
   }
 };

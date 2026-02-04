@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
-import ParticleNetworkAnimation from '../../components/ParticleNetworkAnimation';
+import ParticlesBackground from '../../components/ParticlesBackground';
 import './events.css';
 
 const Technical = () => {
@@ -11,45 +11,50 @@ const Technical = () => {
   const events = [
     {
       name: 'Paper Presentation',
+      slug: 'paper-presentation',
       tagline: 'Present Your Research & Ideas To The World Of Innovation',
       prize: '₹ 50,000 *',
       image: '/assets/images/paperpresentation.jpg'
     },
     {
       name: 'Hackathon',
+      slug: 'hackathon',
       tagline: 'Code Through The Night, Build The Future In 24 Hours',
       prize: '₹ 1,00,000 *',
       image: '/assets/images/Hackathon.jpeg'
     },
     {
       name: 'RRR',
+      slug: 'rrr',
       tagline: 'React, Respond & Resolve: The Ultimate Tech Quiz',
       prize: '₹ 35,000 *',
       image: '/assets/images/RRR.jpeg'
     },
     {
       name: 'Project Expo',
+      slug: 'project-expo',
       tagline: 'Showcase Your Innovation & Engineering Excellence',
       prize: '₹ 75,000 *',
       image: '/assets/images/ProjectExpo.jpeg'
     },
     {
       name: 'Worst UI',
+      slug: 'worst-ui',
       tagline: 'Create The Most Hilariously Terrible User Interface',
       prize: '₹ 30,000 *',
       image: '/assets/images/WorstUI.jpeg'
     },
     {
       name: 'Web Design',
+      slug: 'web-design',
       tagline: 'Craft Digital Experiences That Captivate & Connect',
       prize: '₹ 40,000 *',
       image: '/assets/images/WebDesign.jpeg'
     }
   ];
 
-  const handleEventClick = (eventName) => {
-    const eventId = eventName.toLowerCase().replace(/\s+/g, '-');
-    navigate(`/events/technical/${eventId}`);
+  const handleEventClick = (slug) => {
+    navigate(`/events/technical/${slug}`);
   };
 
   const containerVariants = {
@@ -83,7 +88,7 @@ const Technical = () => {
 
   return (
     <div className="events-container events-transparent-bg">
-      <ParticleNetworkAnimation />
+      <ParticlesBackground />
 
       <motion.div
         initial="hidden"
@@ -117,7 +122,7 @@ const Technical = () => {
                 tagline={event.tagline}
                 prize={event.prize}
                 image={event.image}
-                onClick={() => handleEventClick(event.name)}
+                onClick={() => handleEventClick(event.slug)}
               />
             </motion.div>
           ))}

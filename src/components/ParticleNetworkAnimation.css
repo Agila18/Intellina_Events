@@ -46,9 +46,10 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    background-image: radial-gradient(circle closest-side, rgba(255, 0, 0, 0.15), transparent);
-    /* Redder glow */
+    background-image: radial-gradient(circle closest-side, rgba(229, 9, 20, 0.12), transparent);
+    /* Intellina Red, subtler */
     pointer-events: none;
+    filter: blur(30px);
 }
 
 .glow-1 {

@@ -311,7 +311,7 @@ const DiceRoller = ({ category = 'technical' }) => {
         }
         @keyframes typing {
           from { width: 0 }
-          to { width: 100% }
+          to { width: 24ch }
         }
         @keyframes blink {
           50% { border-color: transparent }
@@ -329,8 +329,10 @@ const DiceRoller = ({ category = 'technical' }) => {
         .typing-text {
           overflow: hidden;
           white-space: nowrap;
-          border-right: 4px solid #ff1a1a;
-          animation: typing 1.5s steps(20, end) forwards, blink 0.5s step-end infinite;
+          /* Removed border-right as per user request to remove red lines */
+          animation: typing 1.5s steps(22, end) forwards; /* Adjusted steps to char count approx */
+          display: inline-block;
+          text-align: center;
         }
         .die-implode {
           animation: dieImplode 0.8s ease-out forwards;

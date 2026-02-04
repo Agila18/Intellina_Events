@@ -1,6 +1,6 @@
 import React from 'react';
 import CategoryCard from '../../components/CategoryCard';
-import ElevenReveal from '../../components/ElevenReveal';
+
 import { useNavigate } from 'react-router-dom';
 import './events.css';
 
@@ -52,12 +52,8 @@ const Events = () => {
         {/* Overlay Content */}
         <div className="events-landing">
           <h1 className="events-landing-title stranger-font typing">
-            EVENTS
-          </h1>
-
-          <p className="events-landing-subtitle">
             Choose Your Gateway
-          </p>
+          </h1>
 
           <div className="category-grid">
             <CategoryCard

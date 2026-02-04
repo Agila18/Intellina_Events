@@ -6,7 +6,7 @@ import './EventDescription.css';
 const EventDescription = () => {
   const { category, eventId } = useParams();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState('stages');
 
   // Fetch event details dynamically
   const eventDetails = eventsData[category]?.[eventId];
@@ -23,9 +23,9 @@ const EventDescription = () => {
   }
 
   const tabs = [
-    { id: 'description', label: 'DESCRIPTION' },
     { id: 'stages', label: 'STAGES & TIMELINE' },
-    { id: 'rules', label: 'RULES & GUIDELINES' }
+    { id: 'rules', label: 'RULES' },
+    { id: 'info', label: 'INFO' }
   ];
 
   const handleClose = () => {
@@ -35,7 +35,7 @@ const EventDescription = () => {
   return (
     <div className="event-desc-overlay">
       <div className="event-desc-card">
-        
+
         {/* Close Button */}
         <button className="close-btn" onClick={handleClose}>
           X
@@ -47,14 +47,18 @@ const EventDescription = () => {
           <div className="event-desc-left">
             <h1 className="event-desc-title">{eventDetails.title}</h1>
 
+            {/* Description Moved Here */}
+            <p className="event-desc-hero-text">
+              {eventDetails.description}
+            </p>
+
             {/* Tabs */}
             <div className="event-tabs">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  className={`tab-btn ${
-                    activeTab === tab.id ? 'active' : ''
-                  }`}
+                  className={`tab-btn ${activeTab === tab.id ? 'active' : ''
+                    }`}
                   onClick={() => setActiveTab(tab.id)}
                 >
                   {tab.label}
@@ -64,51 +68,50 @@ const EventDescription = () => {
 
             {/* Tab Content */}
             <div className="tab-content">
-              {activeTab === 'description' && (
-                <p>{eventDetails.description}</p>
-              )}
 
               {activeTab === 'stages' && (
-                <p style={{ whiteSpace: 'pre-line' }}>
-                  {eventDetails.stages}
-                </p>
+                <div className="content-block">
+                  <p style={{ whiteSpace: 'pre-line' }}>{eventDetails.stages}</p>
+                </div>
               )}
 
               {activeTab === 'rules' && (
-                <p style={{ whiteSpace: 'pre-line' }}>
-                  {eventDetails.rules}
-                </p>
+                <div className="content-block">
+                  <p style={{ whiteSpace: 'pre-line' }}>{eventDetails.rules}</p>
+                </div>
+              )}
+
+              {activeTab === 'info' && (
+                <div className="content-block info-grid">
+                  <div className="info-item">
+                    <span className="info-label">DATE & VENUE</span>
+                    <span className="info-value">{eventDetails.dateVenue}</span>
+                  </div>
+                  {/* Add more info here if available in object, or placeholder */}
+                </div>
               )}
             </div>
 
-            {/* Footer */}
+            {/* Glowing Prize Section */}
             <div className="event-desc-footer">
-              <div className="prize-worth">
-                <span className="prize-worth-label">PRIZES WORTH</span>
-                <div className="prize-worth-value">
-                  <span className="currency">RS.</span> {eventDetails.prizes}
+              <div className="glowing-prize-card">
+                <div className="glowing-border"></div>
+                <div className="prize-content">
+                  <span className="prize-label">PRIZE POOL</span>
+                  <div className="prize-amount-wrapper">
+                    <span className="currency">Rs.</span>
+                    <span className="amount-3d">{eventDetails.prizes}</span>
+                  </div>
+                  <div className="particles">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
                 </div>
-
-                {/* Date & Venue */}
-                <p
-                  style={{
-                    color: '#ff9999',
-                    marginTop: '10px',
-                    letterSpacing: '1px'
-                  }}
-                >
-                  {eventDetails.dateVenue}
-                </p>
               </div>
 
               {/* Actions */}
               <div className="event-actions">
                 <button className="btn-stylized register-btn">
-                  REGISTER
-                </button>
-
-                <button className="btn-stylized problem-btn">
-                  PROBLEM STATEMENT
+                  REGISTER NOW
                 </button>
               </div>
             </div>
@@ -116,14 +119,14 @@ const EventDescription = () => {
 
           {/* RIGHT COLUMN */}
           <div className="event-desc-right">
-           <div className="event-media-container">
-  <img
-    src={eventDetails.image}
-    alt={eventDetails.title}
-    className="event-media"
-  />
-  <div className="media-overlay"></div>
-</div>
+            <div className="event-media-container">
+              <img
+                src={eventDetails.image}
+                alt={eventDetails.title}
+                className="event-media"
+              />
+              <div className="media-overlay"></div>
+            </div>
 
           </div>
 

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import './events.css';
-import ParticleNetworkAnimation from '../../components/ParticleNetworkAnimation';
+import ParticlesBackground from '../../components/ParticlesBackground';
 
 const NonTech = () => {
   const navigate = useNavigate();
@@ -15,27 +15,6 @@ const NonTech = () => {
       tagline: 'Strategy, Survival & Social Dynamics In The Ultimate Reality Challenge',
       prize: 'Rs. 2500 *',
       image: '/assets/images/Biggboss.jpeg'
-    },
-    {
-      name: 'Neuro Quest',
-      slug: 'neuroquest',
-      tagline: 'Test Your Mind, Challenge Your Logic & Decode The Mysteries',
-      prize: 'Rs. 4500 *',
-      image: '/assets/images/NeuroQuest.jpeg'
-    },
-    {
-      name: 'Connections',
-      slug: 'connections',
-      tagline: 'Link The Clues, Find Patterns & Master The Art Of Association',
-      prize: 'Rs. 3000 *',
-      image: '/assets/images/Connections.jpeg'
-    },
-    {
-      name: 'Murder Mystery',
-      slug: 'murder-mystery',
-      tagline: 'Unravel Secrets, Follow Clues & Solve The Enigma',
-      prize: 'Rs. 5000 *',
-      image: '/assets/images/Murder Mystery.jpeg'
     },
     {
       name: 'IPL Auction',
@@ -52,11 +31,25 @@ const NonTech = () => {
       image: '/assets/images/TreasureHunt.jpeg'
     },
     {
-      name: 'Snap Sense',
-      slug: 'snap-sense',
-      tagline: 'Sense the moment, capture the magic, win the game',
-      prize: 'Rs. 2500 *',
-      image: '/assets/images/SnapSense.jpeg'
+      name: 'Connections',
+      slug: 'connections',
+      tagline: 'Link The Clues, Find Patterns & Master The Art Of Association',
+      prize: 'Rs. 3000 *',
+      image: '/assets/images/Connections.jpeg'
+    },
+    {
+      name: 'Murder Mystery',
+      slug: 'murder-mystery',
+      tagline: 'Unravel Secrets, Follow Clues & Solve The Enigma',
+      prize: 'Rs. 5000 *',
+      image: '/assets/images/Murder Mystery.jpeg'
+    },
+    {
+      name: 'Neuro Quest',
+      slug: 'neuroquest',
+      tagline: 'Test Your Mind, Challenge Your Logic & Decode The Mysteries',
+      prize: 'Rs. 4500 *',
+      image: '/assets/images/NeuroQuest.jpeg'
     },
     {
       name: 'Object Odyssey',
@@ -64,6 +57,13 @@ const NonTech = () => {
       tagline: 'A thrilling hunt for hidden objects that sharpens your mind.',
       prize: 'Rs. 3500 *',
       image: '/assets/images/ObjectOdyssey.jpeg'
+    },
+    {
+      name: 'Snap Sense',
+      slug: 'snap-sense',
+      tagline: 'Sense the moment, capture the magic, win the game',
+      prize: 'Rs. 2500 *',
+      image: '/assets/images/SnapSense.jpeg'
     }
   ];
 
@@ -102,7 +102,7 @@ const NonTech = () => {
 
   return (
     <div className="events-container events-transparent-bg">
-      <ParticleNetworkAnimation />
+      <ParticlesBackground />
 
       <motion.div
         initial="hidden"

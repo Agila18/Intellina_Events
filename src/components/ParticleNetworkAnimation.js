@@ -32,28 +32,96 @@ const ParticleNetworkAnimation = () => {
                 this.canvas = parent.canvas;
                 this.ctx = parent.ctx;
                 this.particleColor = returnRandomArrayitem(this.network.options.particleColors);
-                this.radius = getLimitedRandom(1.5, 2.5);
+
+                // 3D Depth Property (0 = far/fade, 1 = near/bright)
+                this.z = Math.random();
+
+                // Size scales with depth
+                const baseRadius = getLimitedRandom(1.5, 2.5);
+                this.radius = baseRadius * (0.5 + this.z * 0.8);
+
                 this.opacity = 0;
                 this.x = x || Math.random() * this.canvas.width;
                 this.y = y || Math.random() * this.canvas.height;
+
+                // Velocity scales with depth (parallax effect)
+                const baseVelocity = parent.options.velocity;
                 this.velocity = {
-                    x: (Math.random() - 0.5) * parent.options.velocity,
-                    y: (Math.random() - 0.5) * parent.options.velocity
+                    x: (Math.random() - 0.5) * baseVelocity * (0.5 + this.z),
+                    y: (Math.random() - 0.5) * baseVelocity * (0.5 + this.z)
                 };
+
+                // Flow Field / Wander properties
+                this.vector = Math.random() * Math.PI * 2; // Movement angle
+                this.speed = baseVelocity * (0.5 + this.z);
+                this.wander = 0.05; // Amount it can steer per frame
+
+                // Pulsing Effect
+                this.pulseAngle = Math.random() * Math.PI * 2;
+                this.pulseSpeed = 0.05 + Math.random() * 0.05;
             }
 
             update() {
+                // Fade in
                 if (this.opacity < 1) {
                     this.opacity += 0.01;
                 } else {
                     this.opacity = 1;
                 }
-                // Change dir if outside map
-                if (this.x > this.canvas.width + 100 || this.x < -100) {
-                    this.velocity.x = -this.velocity.x;
+
+                // Pulsing
+                this.pulseAngle += this.pulseSpeed;
+                // Oscillate opacity slightly based on pulse
+                const depthOpacity = 0.3 + (this.z * 0.7);
+                const pulseVariation = Math.sin(this.pulseAngle) * 0.2;
+                this.currentOpacity = Math.max(0.1, Math.min(1, depthOpacity + pulseVariation));
+
+                // Organic Movement (Wander)
+                // Randomly steer the vector slightly
+                this.vector += (Math.random() - 0.5) * this.wander;
+
+                // Update specific X/Y velocity based on angle
+                this.velocity.x = Math.cos(this.vector) * this.speed;
+                this.velocity.y = Math.sin(this.vector) * this.speed;
+
+
+                // Repulse from cursor - Plasma interaction
+                if (this.network.interactionParticle) {
+                    const mouse = this.network.interactionParticle;
+                    const dx = this.x - mouse.x;
+                    const dy = this.y - mouse.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const repulseRadius = 180;
+
+                    if (distance < repulseRadius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (repulseRadius - distance) / repulseRadius;
+
+                        // Push away
+                        const directionX = forceDirectionX * force * 5 * (0.5 + this.z);
+                        const directionY = forceDirectionY * force * 5 * (0.5 + this.z);
+
+                        this.x += directionX;
+                        this.y += directionY;
+
+                        // "Plasma" excitement - near mouse, pulse faster and glow brighter
+                        this.currentOpacity = Math.min(1, this.currentOpacity + force * 0.5);
+                    }
                 }
-                if (this.y > this.canvas.height + 100 || this.y < -100) {
-                    this.velocity.y = -this.velocity.y;
+
+                // Change dir if outside map - wrap around or bounce
+                // Let's bounce for now to keep them on screen
+                if (this.x > this.canvas.width + 50 || this.x < -50) {
+                    this.vector = Math.PI - this.vector; // Reflect X
+                    // Push back in to prevent sticking
+                    if (this.x > this.canvas.width) this.x = this.canvas.width;
+                    if (this.x < 0) this.x = 0;
+                }
+                if (this.y > this.canvas.height + 50 || this.y < -50) {
+                    this.vector = -this.vector; // Reflect Y
+                    if (this.y > this.canvas.height) this.y = this.canvas.height;
+                    if (this.y < 0) this.y = 0;
                 }
 
                 // Update position
@@ -64,9 +132,20 @@ const ParticleNetworkAnimation = () => {
             draw() {
                 this.ctx.beginPath();
                 this.ctx.fillStyle = this.particleColor;
-                this.ctx.globalAlpha = this.opacity;
+                this.ctx.globalAlpha = this.currentOpacity * this.opacity; // Combine fade-in with pulse
                 this.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+
+                // Glow effect
+                if (this.z > 0.6) {
+                    // Bright neon glow for foreground
+                    this.ctx.shadowBlur = 15 * this.z;
+                    this.ctx.shadowColor = this.particleColor;
+                } else {
+                    this.ctx.shadowBlur = 0;
+                }
+
                 this.ctx.fill();
+                this.ctx.shadowBlur = 0; // Reset
             }
         }
 
@@ -76,14 +155,17 @@ const ParticleNetworkAnimation = () => {
         class ParticleNetwork {
             constructor(parent) {
                 this.options = {
-                    velocity: 1, // the higher the faster
-                    density: 15000, // the lower the denser
-                    netLineDistance: 200,
-                    netLineColor: 'rgba(229, 9, 20, 0.4)', // Intellina Red
-                    particleColors: ['#e50914', '#ff3333', '#b30710'] // Red variants
+                    velocity: 0.8, // Slightly slower base speed
+                    density: 12000,
+                    netLineDistance: 220,
+                    netLineColor: 'rgba(229, 9, 20, 1)', // Base color, opacity handled dynamically
+                    particleColors: ['#e50914', '#ff4d4d', '#b30710'] // Red variants
                 };
                 this.canvas = parent.canvas;
                 this.ctx = parent.ctx;
+
+                // Track time for packet animations
+                this.time = 0;
 
                 this.animationFrame = null;
                 this.createIntervalId = null;
@@ -112,7 +194,7 @@ const ParticleNetworkAnimation = () => {
                             clearInterval(this.createIntervalId);
                         }
                         counter++;
-                    }, 250);
+                    }, 100); // Faster spawn for smoother start
                 } else {
                     for (let i = 0; i < quantity; i++) {
                         this.particles.push(new Particle(this));
@@ -123,6 +205,7 @@ const ParticleNetworkAnimation = () => {
             createInteractionParticle() {
                 this.interactionParticle = new Particle(this);
                 this.interactionParticle.velocity = { x: 0, y: 0 };
+                this.interactionParticle.z = 1; // Mouse is always "front"
                 this.particles.push(this.interactionParticle);
                 return this.interactionParticle;
             }
@@ -137,8 +220,8 @@ const ParticleNetworkAnimation = () => {
 
             update() {
                 if (this.canvas) {
+                    this.time += 0.01; // Increment global time
                     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.ctx.globalAlpha = 1;
 
                     // Draw connections
                     for (let i = 0; i < this.particles.length; i++) {
@@ -146,24 +229,61 @@ const ParticleNetworkAnimation = () => {
                             const p1 = this.particles[i];
                             const p2 = this.particles[j];
 
-                            // Simple check
-                            let distance = Math.min(Math.abs(p1.x - p2.x), Math.abs(p1.y - p2.y));
-                            if (distance > this.options.netLineDistance) continue;
+                            // Skip if z-depth difference is too high (don't connect far background to foreground)
+                            if (Math.abs(p1.z - p2.z) > 0.3) continue;
 
                             // Precise check
-                            distance = Math.sqrt(
+                            const distance = Math.sqrt(
                                 Math.pow(p1.x - p2.x, 2) +
                                 Math.pow(p1.y - p2.y, 2)
                             );
-                            if (distance > this.options.netLineDistance) continue;
+
+                            // Max distance scales with average depth (closer particles connect further)
+                            const avgZ = (p1.z + p2.z) / 2;
+                            const maxDist = this.options.netLineDistance * (0.5 + avgZ);
+
+                            if (distance > maxDist) continue;
 
                             this.ctx.beginPath();
-                            this.ctx.strokeStyle = this.options.netLineColor;
-                            this.ctx.globalAlpha = (this.options.netLineDistance - distance) / this.options.netLineDistance * p1.opacity * p2.opacity;
-                            this.ctx.lineWidth = 0.7;
+                            const color = this.options.netLineColor; // Using string replacement for opacity is tricky if hex/rgb.
+                            // Assuming hex or rgb, let's just stick to a fixed color ref or parse it effectively.
+                            // Simpler: Use netLineColor as base, but control opacity via globalAlpha
+
+                            this.ctx.strokeStyle = '#e50914'; // Hardcoded base red for lines
+
+                            // Opacity based on distance AND depth brightness
+                            const distFactor = (maxDist - distance) / maxDist;
+                            const depthFactor = 0.1 + (avgZ * 0.6); // Background lines fainter
+
+                            this.ctx.globalAlpha = distFactor * depthFactor * p1.opacity * p2.opacity;
+                            this.ctx.lineWidth = 0.5 + (avgZ * 0.5); // Thicker lines in front
+
                             this.ctx.moveTo(p1.x, p1.y);
                             this.ctx.lineTo(p2.x, p2.y);
                             this.ctx.stroke();
+
+                            // --- DATA PACKET ANIMATION ---
+                            // Occasional "packets" flowing along lines
+                            // Use a unique hash based on particle indices to decide if/when this line gets a packet
+                            const pairId = i * this.particles.length + j;
+                            // Speed of packet depends on pairId
+                            const packetSpeed = 0.5 + (pairId % 10) * 0.05;
+                            const packetProgress = (this.time * packetSpeed + pairId) % 5; // Modulo larger number for spacing
+
+                            // If progress is between 0 and 1, draw the packet along the line
+                            if (packetProgress >= 0 && packetProgress <= 1) {
+                                const packetX = p1.x + (p2.x - p1.x) * packetProgress;
+                                const packetY = p1.y + (p2.y - p1.y) * packetProgress;
+
+                                this.ctx.beginPath();
+                                this.ctx.fillStyle = '#ffffff'; // White packet for contrast
+                                this.ctx.globalAlpha = 1 * distFactor * depthFactor; // Bright
+                                this.ctx.arc(packetX, packetY, 1.5, 0, Math.PI * 2);
+                                this.ctx.shadowBlur = 5;
+                                this.ctx.shadowColor = '#ffffff';
+                                this.ctx.fill();
+                                this.ctx.shadowBlur = 0;
+                            }
                         }
                     }
 
@@ -185,7 +305,6 @@ const ParticleNetworkAnimation = () => {
                 this.touchIsMoving = false;
 
                 this.onMouseMove = (e) => {
-                    // Adjust for canvas position relative to viewport
                     const rect = this.canvas.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
@@ -255,7 +374,6 @@ const ParticleNetworkAnimation = () => {
                     this.removeInteractionParticle();
                 };
 
-                // Bind events to canvas
                 this.canvas.addEventListener('mousemove', this.onMouseMove);
                 this.canvas.addEventListener('touchmove', this.onTouchMove);
                 this.canvas.addEventListener('mousedown', this.onMouseDown);
@@ -298,7 +416,7 @@ const ParticleNetworkAnimation = () => {
         const particleNetwork = new ParticleNetwork({
             canvas: canvas,
             ctx: ctx,
-            options: {} // Options handled inside class constructor for now, or pass props
+            options: {}
         });
 
         const handleResize = () => {
@@ -313,7 +431,9 @@ const ParticleNetworkAnimation = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
             particleNetwork.destroy();
-            container.removeChild(canvas);
+            if (container.contains(canvas)) {
+                container.removeChild(canvas);
+            }
         };
 
     }, []);
