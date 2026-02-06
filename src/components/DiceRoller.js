@@ -113,7 +113,16 @@ const DiceRoller = ({ category = 'technical' }) => {
   };
 
   useEffect(() => {
+    if (showResult) {
+      document.body.classList.add('modal-active');
+    } else {
+      document.body.classList.remove('modal-active');
+    }
+  }, [showResult]);
+
+  useEffect(() => {
     return () => {
+      document.body.classList.remove('modal-active');
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);

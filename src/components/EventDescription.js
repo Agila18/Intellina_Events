@@ -14,6 +14,14 @@ const EventDescription = () => {
     navigate(-1);
   };
 
+  // Handle back button visibility
+  useEffect(() => {
+    document.body.classList.add('modal-active');
+    return () => {
+      document.body.classList.remove('modal-active');
+    };
+  }, []);
+
   // ESC key support
   useEffect(() => {
     const handleKeyDown = (event) => {
