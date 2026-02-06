@@ -312,5 +312,5 @@ const flattenedEvents = [
 ];
 
 
-export { events as eventsData };
+export const eventsData = events;
 export default flattenedEvents;

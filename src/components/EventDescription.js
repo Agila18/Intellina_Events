@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { eventsData } from '../components/data/eventsData';
+import { eventsData } from './data/eventsData';
 import './EventDescription.css';
 
 const EventDescription = () => {
