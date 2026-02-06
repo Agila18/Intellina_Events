@@ -23,6 +23,11 @@ const DiceRoller = ({ category = 'technical' }) => {
   const [isShaking, setIsShaking] = useState(false);
   const [showTyping, setShowTyping] = useState(false);
   const timeoutRef = useRef(null);
+  const categoryNames = {
+    'technical': 'Technical',
+    'non-tech': 'Non-Tech',
+    'flagship': 'Flagship'
+  };
 
   useEffect(() => {
     // Tooltip prompt every 15 seconds
@@ -450,8 +455,8 @@ const DiceRoller = ({ category = 'technical' }) => {
 
               <div className="flex flex-col gap-3 mb-8">
                 <div className="flex items-center justify-between bg-white/5 rounded-lg px-4 py-2 border border-white/10">
-                  <span className="text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">Threat Level</span>
-                  <span className="text-[#ff2b2b] font-black uppercase text-xs tracking-widest animate-pulse drop-shadow-[0_0_5px_rgba(255,0,0,0.5)]">Critical</span>
+                  <span className="text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">Event Category</span>
+                  <span className="text-[#ff2b2b] font-black uppercase text-xs tracking-widest animate-pulse drop-shadow-[0_0_5px_rgba(255,0,0,0.5)]">{categoryNames[category] || category}</span>
                 </div>
               </div>
 
