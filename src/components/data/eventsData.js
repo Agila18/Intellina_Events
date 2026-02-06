@@ -102,6 +102,34 @@ const events = {
       poster: "/assets/posters/GPTathon.png"
     },
 
+    "rapid-chess": {
+      id: 19,
+      title: "RAPID CHESS",
+      category: "flagship",
+      description:
+        "Test your strategic thinking and speed in our Rapid Chess tournament. Compete against top players in intense timed matches.",
+      day: "Mar 6",
+      time: "2.00 pm to 5.00 pm",
+      teamSize: "Solo",
+      prizes: "As per announcement",
+      image: "/assets/images/RapidChess.jpeg",
+      poster: "/assets/posters/RapidChess.png"
+    },
+
+    "object-odyssey": {
+      id: 17,
+      title: "OBJECT ODYSSEY",
+      category: "flagship",
+      description:
+        "Object Odyssey is a thrilling scavenger hunt that tests observation skills, quick thinking, and the ability to spot hidden objects in complex environments. Participants race to find specific items before time runs out.",
+      day: "Mar 6",
+      time: "3.00 pm to 5.00 pm",
+      teamSize: "Solo / Team (max 3)",
+      prizes: "1,500",
+      image: "/assets/images/ObjectOdyssey.jpeg",
+      poster: "/assets/posters/OBJECTODYSSEY.png"
+    },
+
     esports: {
       id: 9,
       title: "E-SPORTS",
@@ -133,18 +161,32 @@ const events = {
       poster: "/assets/posters/BiggBoss.png"
     },
 
-    neuroquest: {
-      id: 12,
-      title: "NEUROQUEST",
+    "ipl-auction": {
+      id: 15,
+      title: "IPL AUCTION",
       category: "non-tech",
       description:
-        "NeuroQuest is a memory and observation challenge that tests recall speed, attention to detail, and accuracy through multiple rounds.",
+        "IPL Auction simulates the excitement of a professional cricket auction, challenging teams to strategically bid and build a balanced squad.",
+      day: "Mar 7",
+      time: "9.00 am",
+      teamSize: "Team of 3-4",
+      prizes: "3,000",
+      image: "/assets/images/IPLAuction.jpeg",
+      poster: "/assets/posters/IPLAuction.png"
+    },
+
+    "treasure-hunt": {
+      id: 16,
+      title: "TREASURE HUNT",
+      category: "non-tech",
+      description:
+        "Treasure Hunt is an adventurous team challenge where clues are solved sequentially to uncover hidden treasures.",
       day: "Mar 6",
-      time: "10.00 am to 12.00 pm",
-      teamSize: "Team of 2-4",
-      prizes: "2,000",
-      image: "/assets/images/NeuroQuest.jpeg",
-      poster: "/assets/posters/NeuroQuest.png"
+      time: "11.00 am to 3.00 pm",
+      teamSize: "Team of 4",
+      prizes: "4,000",
+      image: "/assets/images/TreasureHunt.jpeg",
+      poster: "/assets/posters/TreasureHunt.png"
     },
 
     connections: {
@@ -175,48 +217,6 @@ const events = {
       poster: "/assets/posters/MurderMystery.png"
     },
 
-    "ipl-auction": {
-      id: 15,
-      title: "IPL AUCTION",
-      category: "non-tech",
-      description:
-        "IPL Auction simulates the excitement of a professional cricket auction, challenging teams to strategically bid and build a balanced squad.",
-      day: "Mar 7",
-      time: "9.00 am",
-      teamSize: "Team of 3-4",
-      prizes: "3,000",
-      image: "/assets/images/IPLAuction.jpeg",
-      poster: "/assets/posters/IPLAuction.png"
-    },
-
-    "treasure-hunt": {
-      id: 16,
-      title: "TREASURE HUNT",
-      category: "non-tech",
-      description:
-        "Treasure Hunt is an adventurous team challenge where clues are solved sequentially to uncover hidden treasures.",
-      day: "Mar 6",
-      time: "11.00 am to 3.00 pm",
-      teamSize: "Team of 4",
-      prizes: "4,000",
-      image: "/assets/images/TreasureHunt.jpeg",
-      poster: "/assets/posters/TreasureHunt.png"
-    },
-
-    "object-odyssey": {
-      id: 17,
-      title: "OBJECT ODYSSEY",
-      category: "non-tech",
-      description:
-        "Object Odyssey is a thrilling scavenger hunt that tests observation skills, quick thinking, and the ability to spot hidden objects in complex environments. Participants race to find specific items before time runs out.",
-      day: "Mar 6",
-      time: "3.00 pm to 5.00 pm",
-      teamSize: "Solo / Team (max 3)",
-      prizes: "1,500",
-      image: "/assets/images/ObjectOdyssey.jpeg",
-      poster: "/assets/posters/OBJECTODYSSEY.png"
-    },
-
     "snap-sense": {
       id: 18,
       title: "SNAP SENSE",
@@ -229,20 +229,6 @@ const events = {
       prizes: "2,500",
       image: "/assets/images/SnapSense.jpeg",
       poster: "/assets/posters/SNAPSENSE.png"
-    },
-
-    "rapid-chess": {
-      id: 19,
-      title: "RAPID CHESS",
-      category: "non-tech",
-      description:
-        "Test your strategic thinking and speed in our Rapid Chess tournament. Compete against top players in intense timed matches.",
-      day: "Mar 6",
-      time: "2.00 pm to 5.00 pm",
-      teamSize: "Solo",
-      prizes: "As per announcement",
-      image: "/assets/images/RapidChess.jpeg",
-      poster: "/assets/posters/RapidChess.png"
     }
   }
 };

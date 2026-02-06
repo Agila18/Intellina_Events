@@ -11,7 +11,7 @@ const NonTech = () => {
   const navigate = useNavigate();
   const events = [
     {
-      name: 'Bigboss',
+      name: 'Big Boss',
       slug: 'bigboss',
       tagline: 'Strategy, Survival & Social Dynamics In The Ultimate Reality Challenge',
       prize: '₹ 3,500 *',
@@ -46,32 +46,11 @@ const NonTech = () => {
       image: '/assets/images/Murder Mystery.jpeg'
     },
     {
-      name: 'Neuro Quest',
-      slug: 'neuroquest',
-      tagline: 'Test Your Mind, Challenge Your Logic & Decode The Mysteries',
-      prize: '₹ 2,000 *',
-      image: '/assets/images/NeuroQuest.jpeg'
-    },
-    {
-      name: 'Object Odyssey',
-      slug: 'object-odyssey',
-      tagline: 'A thrilling hunt for hidden objects that sharpens your mind.',
-      prize: '₹ 1,500 *',
-      image: '/assets/images/ObjectOdyssey.jpeg'
-    },
-    {
-      name: 'Snap Sense',
+      name: 'Snap-Sense',
       slug: 'snap-sense',
       tagline: 'Sense the moment, capture the magic, win the game',
       prize: '₹ 2,500 *',
       image: '/assets/images/SnapSense.jpeg'
-    },
-    {
-      name: 'Rapid Chess',
-      slug: 'rapid-chess',
-      tagline: 'Test Your Strategic Thinking & Speed In The Ultimate Chess Battle',
-      prize: '1,500 *',
-      image: '/assets/images/RapidChess.jpeg'
     }
   ];
 

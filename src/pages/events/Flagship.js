@@ -12,15 +12,28 @@ const Flagship = () => {
 
   const flagshipEvents = [
     {
-      name: 'GPTATHON',
+      name: 'GPTathon',
       tagline: 'The Ultimate Challenge: Where Legends Are Made',
       prize: '₹ 8,000 *',
       image: '/assets/images/GPTathon.jpeg',
       slug: 'gptathon'
     },
-
     {
-      name: 'E-sports',
+      name: 'Rapid Chess',
+      tagline: 'Test Your Strategic Thinking & Speed In The Ultimate Chess Battle',
+      prize: 'As per announcement *',
+      image: '/assets/images/RapidChess.jpeg',
+      slug: 'rapid-chess'
+    },
+    {
+      name: 'Object Odyssey',
+      tagline: 'A thrilling hunt for hidden objects that sharpens your mind.',
+      prize: '₹ 1,500 *',
+      image: '/assets/images/ObjectOdyssey.jpeg',
+      slug: 'object-odyssey'
+    },
+    {
+      name: 'E-Sports',
       tagline: 'Battle In Virtual Arenas, Prove Your Gaming Supremacy',
       prize: '₹ 7,000 *',
       image: '/assets/images/E-sports.jpeg',
@@ -93,8 +106,8 @@ const Flagship = () => {
             display: 'flex',
             justifyContent: 'center',
             flexWrap: 'wrap',
-            gap: '80px',
-            maxWidth: '1400px',
+            gap: '40px',
+            maxWidth: '1500px',
             margin: '60px auto',
           }}
         >
