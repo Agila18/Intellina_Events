@@ -13,42 +13,42 @@ const Technical = () => {
       name: 'Paper Presentation',
       slug: 'paper-presentation',
       tagline: 'Present Your Research & Ideas To The World Of Innovation',
-      prize: '₹ 50,000 *',
+      prize: '₹ 5,000 *',
       image: '/assets/images/paperpresentation.jpg'
     },
     {
       name: 'Hackathon',
       slug: 'hackathon',
       tagline: 'Code Through The Night, Build The Future In 24 Hours',
-      prize: '₹ 1,00,000 *',
+      prize: '₹ 25,000 *',
       image: '/assets/images/Hackathon.jpeg'
     },
     {
       name: 'RRR',
       slug: 'rrr',
       tagline: 'React, Respond & Resolve: The Ultimate Tech Quiz',
-      prize: '₹ 35,000 *',
+      prize: '₹ 5,000 *',
       image: '/assets/images/RRR.jpeg'
     },
     {
       name: 'Project Expo',
       slug: 'project-expo',
       tagline: 'Showcase Your Innovation & Engineering Excellence',
-      prize: '₹ 75,000 *',
+      prize: '₹ 8,000 *',
       image: '/assets/images/ProjectExpo.jpeg'
     },
     {
       name: 'Worst UI',
       slug: 'worst-ui',
       tagline: 'Create The Most Hilariously Terrible User Interface',
-      prize: '₹ 30,000 *',
+      prize: '₹ 5,000 *',
       image: '/assets/images/WorstUI.jpeg'
     },
     {
       name: 'Web Design',
       slug: 'web-design',
       tagline: 'Craft Digital Experiences That Captivate & Connect',
-      prize: '₹ 40,000 *',
+      prize: '₹ 5,000 *',
       image: '/assets/images/WebDesign.jpeg'
     }
   ];
@@ -98,13 +98,8 @@ const Technical = () => {
       </div>
       <ParticlesBackground />
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={headerVariants}
-      >
-        <DiceRoller category="technical" />
-      </motion.div>
+      <DiceRoller category="technical" />
+
 
       <div className="event-list-container">
         <motion.div

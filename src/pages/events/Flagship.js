@@ -13,7 +13,7 @@ const Flagship = () => {
     {
       name: 'GPTATHON',
       tagline: 'The Ultimate Challenge: Where Legends Are Made',
-      prize: 'Rs. 2,00,000 *',
+      prize: '₹ 8,000 *',
       image: '/assets/images/GPTathon.jpeg',
       slug: 'gptathon'
     },
@@ -21,7 +21,7 @@ const Flagship = () => {
     {
       name: 'E-sports',
       tagline: 'Battle In Virtual Arenas, Prove Your Gaming Supremacy',
-      prize: 'Rs. 70,000 *',
+      prize: '₹ 7,000 *',
       image: '/assets/images/E-sports.jpeg',
       slug: 'esports'
     }
@@ -72,13 +72,8 @@ const Flagship = () => {
       </div>
       <ParticlesBackground />
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={headerVariants}
-      >
-        <DiceRoller category="flagship" />
-      </motion.div>
+      <DiceRoller category="flagship" />
+
 
       <div className="event-list-container">
         <motion.div

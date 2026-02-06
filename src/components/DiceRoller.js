@@ -134,6 +134,17 @@ const DiceRoller = ({ category = 'technical' }) => {
           to { transform: rotateX(-30deg) rotateY(360deg); }
         }
 
+        @keyframes diceEntrance {
+          from { 
+            opacity: 0;
+            transform: scale(0.3) translateY(100px);
+          }
+          to { 
+            opacity: 1;
+            transform: scale(0.65) translateY(0);
+          }
+        }
+
         .dice-container {
           position: fixed;
           bottom: 20px;
@@ -145,6 +156,7 @@ const DiceRoller = ({ category = 'technical' }) => {
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           transform: scale(0.65);
           transform-origin: bottom right;
+          animation: diceEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         @media (max-width: 768px) {
@@ -431,11 +443,13 @@ const DiceRoller = ({ category = 'technical' }) => {
       >
         {/* Dice Tooltip Prompt - Now inside container to move with it and scale */}
         {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && countdown === null && !showTyping && (
-          <div className="absolute bottom-[105%] right-0 z-[60] animate-fadeIn pointer-events-none w-[280px]">
-            <div className="bg-black text-white px-5 py-3 rounded-xl border border-red-500/50 shadow-[0_0_20px_rgba(255,0,0,0.4)] relative">
-              <p className="text-sm font-bold tracking-wider uppercase whitespace-nowrap">Tap Your Lucky Event!</p>
-              <div className="absolute bottom-[-8px] right-[45px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-black"></div>
-              <div className="absolute bottom-[-9px] right-[45px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-red-500/50 -z-10"></div>
+          <div className="absolute bottom-[110%] right-[-20%] z-[60] animate-fadeIn pointer-events-none w-[320px]">
+            <div className="bg-black/90 text-white px-6 py-4 rounded-2xl border-2 border-red-500 shadow-[0_0_30px_rgba(255,0,0,0.5)] relative backdrop-blur-md">
+              <p className="text-white font-black tracking-[0.1em] uppercase whitespace-nowrap text-center" style={{ fontSize: '24px', fontFamily: "'Orbitron', sans-serif" }}>
+                Tap Your Lucky Event!
+              </p>
+              <div className="absolute bottom-[-10px] right-[60px] w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-black/90"></div>
+              <div className="absolute bottom-[-12px] right-[58px] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-red-500 -z-10"></div>
             </div>
           </div>
         )}

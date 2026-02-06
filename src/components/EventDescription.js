@@ -6,7 +6,6 @@ import './EventDescription.css';
 const EventDescription = () => {
   const { category, eventId } = useParams();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('stages');
 
   // Fetch event details dynamically
   const eventDetails = eventsData[category]?.[eventId];
@@ -21,12 +20,6 @@ const EventDescription = () => {
       </div>
     );
   }
-
-  const tabs = [
-    { id: 'stages', label: 'STAGES & TIMELINE' },
-    { id: 'rules', label: 'RULES' },
-    { id: 'info', label: 'INFO' }
-  ];
 
   const handleClose = () => {
     navigate(-1);
@@ -45,75 +38,59 @@ const EventDescription = () => {
 
           {/* LEFT COLUMN */}
           <div className="event-desc-left">
-            <h1 className="event-desc-title">{eventDetails.title}</h1>
+            <h1 className="event-desc-title" data-text={eventDetails.title}>
+              {eventDetails.title}
+            </h1>
 
-            {/* Description Moved Here */}
             <p className="event-desc-hero-text">
               {eventDetails.description}
             </p>
 
-            {/* Tabs */}
-            <div className="event-tabs">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`tab-btn ${activeTab === tab.id ? 'active' : ''
-                    }`}
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label}
-                </button>
-              ))}
+            {/* Glowing Prize Section - VISIBLE BELOW DESCRIPTION */}
+            <div className="premium-prize-card">
+              <div className="prize-glitch-bg"></div>
+              <div className="prize-content">
+                <div className="prize-header">
+                  <div className="trophy-icon">🏆</div>
+                  <span className="prize-label">GRAND PRIZE POOL</span>
+                </div>
+                <div className="prize-amount-3d">
+                  <span className="currency-symbol">₹</span>
+                  <span className="amount-digit">{eventDetails.prizes}</span>
+                  <span className="asterisk">*</span>
+                </div>
+                <div className="prize-aura"></div>
+              </div>
             </div>
 
-            {/* Tab Content */}
-            <div className="tab-content">
-
-              {activeTab === 'stages' && (
-                <div className="content-block">
-                  <p style={{ whiteSpace: 'pre-line' }}>{eventDetails.stages}</p>
+            {/* QUICK INFO GRID - Date, Timing, Team Size */}
+            <div className="event-quick-info-grid">
+              <div className="info-card schedule-card">
+                <div className="info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 </div>
-              )}
-
-              {activeTab === 'rules' && (
-                <div className="content-block">
-                  <p style={{ whiteSpace: 'pre-line' }}>{eventDetails.rules}</p>
-                </div>
-              )}
-
-              {activeTab === 'info' && (
-                <div className="content-block info-grid">
-                  <div className="info-item">
-                    <span className="info-label">DATE & VENUE</span>
-                    <span className="info-value">{eventDetails.dateVenue}</span>
-                  </div>
-                  {/* Add more info here if available in object, or placeholder */}
-                </div>
-              )}
-            </div>
-
-            {/* Glowing Prize Section */}
-            <div className="event-desc-footer">
-              <div className="glowing-prize-card">
-                <div className="glowing-border"></div>
-                <div className="prize-content">
-                  <span className="prize-label">PRIZE POOL</span>
-                  <div className="prize-amount-wrapper">
-                    <span className="currency">Rs.</span>
-                    <span className="amount-3d">{eventDetails.prizes}</span>
-                  </div>
-                  <div className="particles">
-                    <span></span><span></span><span></span><span></span>
-                  </div>
+                <div className="info-text">
+                  <span className="info-label">SCHEDULE</span>
+                  <span className="info-value">{eventDetails.day}- {eventDetails.time}</span>
                 </div>
               </div>
 
-              {/* Actions */}
-              <div className="event-actions">
-                <button className="btn-stylized register-btn">
-                  REGISTER NOW
-                </button>
+              <div className="info-card team-card">
+                <div className="info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div className="info-text">
+                  <span className="info-label">TEAM SIZE</span>
+                  <span className="info-value">{eventDetails.teamSize}</span>
+                </div>
               </div>
+            </div>
+
+            {/* Actions */}
+            <div className="event-actions">
+              <button className="btn-stylized register-btn">
+                SECURE YOUR SPOT NOW
+              </button>
             </div>
           </div>
 
@@ -121,13 +98,12 @@ const EventDescription = () => {
           <div className="event-desc-right">
             <div className="event-media-container">
               <img
-                src={eventDetails.image}
+                src={eventDetails.poster}
                 alt={eventDetails.title}
                 className="event-media"
               />
               <div className="media-overlay"></div>
             </div>
-
           </div>
 
         </div>
