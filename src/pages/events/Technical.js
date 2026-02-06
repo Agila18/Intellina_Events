@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
 import ParticlesBackground from '../../components/ParticlesBackground';
+import BackButton from '../../components/BackButton';
 import './events.css';
 
 const Technical = () => {
@@ -93,9 +94,7 @@ const Technical = () => {
         backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
       }}
     >
-      <div className="breadcrumb">
-        <Link to="/events">&lt;--Back</Link>
-      </div>
+      <BackButton />
       <ParticlesBackground />
 
       <DiceRoller category="technical" />

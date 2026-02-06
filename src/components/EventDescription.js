@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { eventsData } from './data/eventsData';
 import './EventDescription.css';
 
@@ -9,6 +9,21 @@ const EventDescription = () => {
 
   // Fetch event details dynamically
   const eventDetails = eventsData[category]?.[eventId];
+
+  const handleClose = () => {
+    navigate(-1);
+  };
+
+  // ESC key support
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Safety fallback
   if (!eventDetails) {
@@ -20,10 +35,6 @@ const EventDescription = () => {
       </div>
     );
   }
-
-  const handleClose = () => {
-    navigate(-1);
-  };
 
   return (
     <div className="event-desc-overlay">
@@ -88,7 +99,7 @@ const EventDescription = () => {
 
             {/* Actions */}
             <div className="event-actions">
-              <button className="btn-stylized register-btn">
+              <button className="register-btn">
                 SECURE YOUR SPOT NOW
               </button>
             </div>
