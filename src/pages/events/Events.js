@@ -71,7 +71,7 @@ const Events = () => {
               clickAudioSrc="/assets/audio/Dustin_Technical_audio.mpeg"
             />
             <CategoryCard
-              title="FLAGSHIP EVENT"
+              title="FLAGSHIP EVENTS"
               subtitle="The Main Gate."
               route="/events/flagship"
               character={voiceLines.flagship.character}
