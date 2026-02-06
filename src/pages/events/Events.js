@@ -72,6 +72,7 @@ const Events = () => {
               character={voiceLines.flagship.character}
               audioSrc={voiceLines.flagship.audio}
               subtitleText={voiceLines.flagship.subtitle}
+              clickAudioSrc="/assets/audio/Steve_Flagship_audio.mpeg"
             />
             <CategoryCard
               title="NON-TECH EVENTS"
@@ -80,6 +81,7 @@ const Events = () => {
               character={voiceLines.nontech.character}
               audioSrc={voiceLines.nontech.audio}
               subtitleText={voiceLines.nontech.subtitle}
+              clickAudioSrc="/assets/audio/Max_Nontechnical_audio.mpeg"
             />
 
 
