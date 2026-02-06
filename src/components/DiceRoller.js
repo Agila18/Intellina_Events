@@ -136,15 +136,31 @@ const DiceRoller = ({ category = 'technical' }) => {
 
         .dice-container {
           position: fixed;
-          bottom: 24px;
-          right: 24px;
+          bottom: 20px;
+          right: 20px;
           z-index: 50;
-          width: 160px;
-          height: 160px;
+          width: 140px;
+          height: 140px;
           perspective: 1200px;
           transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-          transform: scale(0.7);
+          transform: scale(0.65);
           transform-origin: bottom right;
+        }
+
+        @media (max-width: 768px) {
+          .dice-container {
+            bottom: 15px;
+            right: 15px;
+            transform: scale(0.5);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .dice-container {
+            bottom: 10px;
+            right: 10px;
+            transform: scale(0.45);
+          }
         }
 
         .dice-container.centered {

@@ -4,7 +4,7 @@
   padding: 20px;
   background: black;
   border-bottom: 2px solid red;
-  box-shadow: 0 2px 12px rgba(229, 9,20, 0.45);
+  box-shadow: 0 2px 12px rgba(229, 9, 20, 0.45);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -47,11 +47,46 @@
 
 /* Flicker animation */
 @keyframes flicker {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .nav-link:hover {
   animation: flicker 0.15s infinite;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav-bar {
+    padding: 10px 5px;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-bar {
+    gap: 5px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 6px 8px;
+    letter-spacing: 0.5px;
+  }
 }

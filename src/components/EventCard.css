@@ -7,15 +7,22 @@
   transition: transform 0.3s ease;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .card-wrapper {
     transform: scale(0.85);
     margin: -35px auto;
-    /* Adjust for scale shrinkage */
+  }
+
+  .card-content h3 {
+    font-size: 20px;
+  }
+
+  .card-content p {
+    font-size: 12px;
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 360px) {
   .card-wrapper {
     transform: scale(0.75);
     margin: -60px auto;
