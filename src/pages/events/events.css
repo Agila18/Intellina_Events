@@ -717,7 +717,7 @@ body {
   align-items: center;
   gap: 14px;
   margin-bottom: 0;
-  font-size: 13px;
+  font-size: 1.5rem;
   /* Slightly smaller for the corner */
   color: rgba(255, 255, 255, 0.45);
   flex-wrap: wrap;
@@ -731,10 +731,10 @@ body {
 }
 
 .breadcrumb a {
-  color: rgba(229, 9, 20, 0.8);
+  color: #ff0000;
   text-decoration: none;
   transition: all 0.3s;
-  text-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
 .breadcrumb a:hover {
@@ -780,7 +780,13 @@ body {
 
 @media (max-width: 768px) {
   .events-container {
-    padding: 30px 20px 60px;
+    padding: 80px 20px 60px;
+  }
+
+  .breadcrumb {
+    top: 20px;
+    left: 20px;
+    font-size: 1.1rem;
   }
 
   .category-grid {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard';
 import DiceRoller from '../../components/DiceRoller';
@@ -62,6 +62,9 @@ const Flagship = () => {
 
   return (
     <div className="events-container events-transparent-bg">
+      <div className="breadcrumb">
+        <Link to="/events">&lt;--Back</Link>
+      </div>
       <ParticlesBackground />
 
       <motion.div
