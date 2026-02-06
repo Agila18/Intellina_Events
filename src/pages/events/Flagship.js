@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import EventCard from '../../components/EventCard';
-import DiceRoller from '../../components/DiceRoller';
-import ParticlesBackground from '../../components/ParticlesBackground';
-import BackButton from '../../components/BackButton';
+import EventCard from '../../components/events/EventCard';
+import DiceRoller from '../../components/events/DiceRoller';
+import ParticlesBackground from '../../components/events/ParticlesBackground';
+import BackButton from '../../components/events/BackButton';
 import './events.css';
 
 const Flagship = () => {
@@ -15,28 +15,28 @@ const Flagship = () => {
       name: 'GPTathon',
       tagline: 'The Ultimate Challenge: Where Legends Are Made',
       prize: '₹ 8,000 *',
-      image: '/assets/images/GPTathon.jpeg',
+      image: '/assets/events/images/GPTathon.jpeg',
       slug: 'gptathon'
     },
     {
       name: 'Rapid Chess',
       tagline: 'Test Your Strategic Thinking & Speed In The Ultimate Chess Battle',
       prize: 'As per announcement *',
-      image: '/assets/images/RapidChess.jpeg',
+      image: '/assets/events/images/RapidChess.jpeg',
       slug: 'rapid-chess'
     },
     {
       name: 'Object Odyssey',
       tagline: 'A thrilling hunt for hidden objects that sharpens your mind.',
       prize: '₹ 1,500 *',
-      image: '/assets/images/ObjectOdyssey.jpeg',
+      image: '/assets/events/images/ObjectOdyssey.jpeg',
       slug: 'object-odyssey'
     },
     {
       name: 'E-Sports',
       tagline: 'Battle In Virtual Arenas, Prove Your Gaming Supremacy',
       prize: '₹ 7,000 *',
-      image: '/assets/images/E-sports.jpeg',
+      image: '/assets/events/images/E-sports.jpeg',
       slug: 'esports'
     }
   ];
@@ -78,7 +78,7 @@ const Flagship = () => {
     <div
       className="events-container events-transparent-bg"
       style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
+        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/events/images/events-bg.jpeg')"
       }}
     >
       <BackButton />

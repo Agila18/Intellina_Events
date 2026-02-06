@@ -9,7 +9,7 @@ import Events from "./pages/events/Events";
 import Technical from "./pages/events/Technical";
 import NonTech from "./pages/events/NonTech";
 import Flagship from "./pages/events/Flagship";
-import EventDescription from "./components/EventDescription";
+import EventDescription from "./components/events/EventDescription";
 
 
 function App() {

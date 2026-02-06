@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import EventCard from '../../components/EventCard';
-import DiceRoller from '../../components/DiceRoller';
-import ParticlesBackground from '../../components/ParticlesBackground';
-import BackButton from '../../components/BackButton';
+import EventCard from '../../components/events/EventCard';
+import DiceRoller from '../../components/events/DiceRoller';
+import ParticlesBackground from '../../components/events/ParticlesBackground';
+import BackButton from '../../components/events/BackButton';
 import './events.css';
 
 const Technical = () => {
@@ -15,42 +15,42 @@ const Technical = () => {
       slug: 'paper-presentation',
       tagline: 'Present Your Research & Ideas To The World Of Innovation',
       prize: '₹ 5,000 *',
-      image: '/assets/images/paperpresentation.jpg'
+      image: '/assets/events/images/paperpresentation.jpg'
     },
     {
       name: 'Hackathon',
       slug: 'hackathon',
       tagline: 'Code Through The Night, Build The Future In 24 Hours',
       prize: '₹ 25,000 *',
-      image: '/assets/images/Hackathon.jpeg'
+      image: '/assets/events/images/Hackathon.jpeg'
     },
     {
       name: 'RRR',
       slug: 'rrr',
       tagline: 'React, Respond & Resolve: The Ultimate Tech Quiz',
       prize: '₹ 5,000 *',
-      image: '/assets/images/RRR.jpeg'
+      image: '/assets/events/images/RRR.jpeg'
     },
     {
       name: 'Project Expo',
       slug: 'project-expo',
       tagline: 'Showcase Your Innovation & Engineering Excellence',
       prize: '₹ 8,000 *',
-      image: '/assets/images/ProjectExpo.jpeg'
+      image: '/assets/events/images/ProjectExpo.jpeg'
     },
     {
       name: 'Worst UI',
       slug: 'worst-ui',
       tagline: 'Create The Most Hilariously Terrible User Interface',
       prize: '₹ 5,000 *',
-      image: '/assets/images/WorstUI.jpeg'
+      image: '/assets/events/images/WorstUI.jpeg'
     },
     {
       name: 'Web Design',
       slug: 'web-design',
       tagline: 'Craft Digital Experiences That Captivate & Connect',
       prize: '₹ 5,000 *',
-      image: '/assets/images/WebDesign.jpeg'
+      image: '/assets/events/images/WebDesign.jpeg'
     }
   ];
 
@@ -91,7 +91,7 @@ const Technical = () => {
     <div
       className="events-container events-transparent-bg"
       style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
+        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/events/images/events-bg.jpeg')"
       }}
     >
       <BackButton />

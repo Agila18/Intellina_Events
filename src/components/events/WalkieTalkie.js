@@ -54,15 +54,15 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, per
         try {
             // Sequence:
             // 1. Click
-            await playAudio('/assets/audio/walkie-click.mp3');
+            await playAudio('/assets/events/audio/walkie-click.mp3');
 
             // 2. Squelch + Static start
-            const staticAudio = new Audio('/assets/audio/walkie-static-loop.mp3');
+            const staticAudio = new Audio('/assets/events/audio/walkie-static-loop.mp3');
             staticAudio.loop = true;
             staticAudio.volume = 0.2;
             staticAudio.play().catch(() => { });
 
-            await playAudio('/assets/audio/walkie-squelch.mp3');
+            await playAudio('/assets/events/audio/walkie-squelch.mp3');
 
             // 3. Voice + Subtitle
             // Run subtitle concurrently with voice, but await BOTH
@@ -78,7 +78,7 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, per
                 // The component unmounting will clean it up naturally
                 if (!persistActive) {
                     staticAudio.pause();
-                    await playAudio('/assets/audio/walkie-squelch.mp3'); // Squelch out
+                    await playAudio('/assets/events/audio/walkie-squelch.mp3'); // Squelch out
                 }
             }
 

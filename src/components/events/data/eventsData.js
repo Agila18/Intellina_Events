@@ -11,8 +11,8 @@ const events = {
       time: "10.00 am to 5.00 pm",
       teamSize: "Team of 4",
       prizes: "5,000",
-      image: "/assets/images/paperpresentation.jpg",
-      poster: "/assets/posters/paperpresentation.png"
+      image: "/assets/events/images/paperpresentation.jpg",
+      poster: "/assets/events/posters/paperpresentation.png"
     },
 
     hackathon: {
@@ -25,8 +25,8 @@ const events = {
       time: "10.00 am to 5.00 pm",
       teamSize: "Team of 4",
       prizes: "25,000",
-      image: "/assets/images/Hackathon.jpeg",
-      poster: "/assets/posters/Hackathon.png"
+      image: "/assets/events/images/Hackathon.jpeg",
+      poster: "/assets/events/posters/Hackathon.png"
     },
 
     rrr: {
@@ -39,8 +39,8 @@ const events = {
       time: "10.30 am to 3.00 pm",
       teamSize: "Solo",
       prizes: "5,000",
-      image: "/assets/images/RRR.jpeg",
-      poster: "/assets/posters/RRR.png"
+      image: "/assets/events/images/RRR.jpeg",
+      poster: "/assets/events/posters/RRR.png"
     },
 
     "worst-ui": {
@@ -53,8 +53,8 @@ const events = {
       time: "11.00 am to 2.00 pm",
       teamSize: "Team of 4",
       prizes: "5,000",
-      image: "/assets/images/WorstUI.jpeg",
-      poster: "/assets/posters/WorstUi.png"
+      image: "/assets/events/images/WorstUI.jpeg",
+      poster: "/assets/events/posters/WorstUi.png"
     },
 
     "web-design": {
@@ -67,8 +67,8 @@ const events = {
       time: "11.00 am to 2.00 pm",
       teamSize: "Team of 4",
       prizes: "5,000",
-      image: "/assets/images/WebDesign.jpeg",
-      poster: "/assets/posters/WebDesign.png"
+      image: "/assets/events/images/WebDesign.jpeg",
+      poster: "/assets/events/posters/WebDesign.png"
     },
 
     "project-expo": {
@@ -81,8 +81,8 @@ const events = {
       time: "9.00 am to 12.00 pm",
       teamSize: "Team of 3-4",
       prizes: "8,000",
-      image: "/assets/images/ProjectExpo.jpeg",
-      poster: "/assets/posters/ProjectExpo.png"
+      image: "/assets/events/images/ProjectExpo.jpeg",
+      poster: "/assets/events/posters/ProjectExpo.png"
     }
   },
 
@@ -98,8 +98,8 @@ const events = {
       time: "10.30 am to 1.30 pm",
       teamSize: "Team of 4",
       prizes: "8,000",
-      image: "/assets/images/GPTathon.jpeg",
-      poster: "/assets/posters/GPTathon.png"
+      image: "/assets/events/images/GPTathon.jpeg",
+      poster: "/assets/events/posters/GPTathon.png"
     },
 
     "rapid-chess": {
@@ -112,8 +112,8 @@ const events = {
       time: "2.00 pm to 5.00 pm",
       teamSize: "Solo",
       prizes: "As per announcement",
-      image: "/assets/images/RapidChess.jpeg",
-      poster: "/assets/posters/RapidChess.png"
+      image: "/assets/events/images/RapidChess.jpeg",
+      poster: "/assets/events/posters/RapidChess.png"
     },
 
     "object-odyssey": {
@@ -126,8 +126,8 @@ const events = {
       time: "3.00 pm to 5.00 pm",
       teamSize: "Solo / Team (max 3)",
       prizes: "1,500",
-      image: "/assets/images/ObjectOdyssey.jpeg",
-      poster: "/assets/posters/OBJECTODYSSEY.png"
+      image: "/assets/events/images/ObjectOdyssey.jpeg",
+      poster: "/assets/events/posters/OBJECTODYSSEY.png"
     },
 
     esports: {
@@ -140,8 +140,8 @@ const events = {
       time: "TBA",
       teamSize: "Solo / Team",
       prizes: "7,000",
-      image: "/assets/images/E-sports.jpeg",
-      poster: "/assets/posters/E-Sports.png"
+      image: "/assets/events/images/E-sports.jpeg",
+      poster: "/assets/events/posters/E-Sports.png"
     }
   },
 
@@ -157,8 +157,8 @@ const events = {
       time: "2.00 pm to 5.00 pm",
       teamSize: "Solo",
       prizes: "3,500",
-      image: "/assets/images/Biggboss.jpeg",
-      poster: "/assets/posters/BiggBoss.png"
+      image: "/assets/events/images/Biggboss.jpeg",
+      poster: "/assets/events/posters/BiggBoss.png"
     },
 
     "ipl-auction": {
@@ -171,8 +171,8 @@ const events = {
       time: "9.00 am",
       teamSize: "Team of 3-4",
       prizes: "3,000",
-      image: "/assets/images/IPLAuction.jpeg",
-      poster: "/assets/posters/IPLAuction.png"
+      image: "/assets/events/images/IPLAuction.jpeg",
+      poster: "/assets/events/posters/IPLAuction.png"
     },
 
     "treasure-hunt": {
@@ -185,8 +185,8 @@ const events = {
       time: "11.00 am to 3.00 pm",
       teamSize: "Team of 4",
       prizes: "4,000",
-      image: "/assets/images/TreasureHunt.jpeg",
-      poster: "/assets/posters/TreasureHunt.png"
+      image: "/assets/events/images/TreasureHunt.jpeg",
+      poster: "/assets/events/posters/TreasureHunt.png"
     },
 
     connections: {
@@ -199,8 +199,8 @@ const events = {
       time: "9.00 am to 12.00 pm",
       teamSize: "Solo",
       prizes: "2,500",
-      image: "/assets/images/Connections.jpeg",
-      poster: "/assets/posters/Connections.png"
+      image: "/assets/events/images/Connections.jpeg",
+      poster: "/assets/events/posters/Connections.png"
     },
 
     "murder-mystery": {
@@ -213,8 +213,8 @@ const events = {
       time: "3.00 pm to 5.00 pm",
       teamSize: "Team",
       prizes: "2,500",
-      image: "/assets/images/Murder Mystery.jpeg",
-      poster: "/assets/posters/MurderMystery.png"
+      image: "/assets/events/images/Murder Mystery.jpeg",
+      poster: "/assets/events/posters/MurderMystery.png"
     },
 
     "snap-sense": {
@@ -227,8 +227,8 @@ const events = {
       time: "11.00 am to 2.00 pm",
       teamSize: "Solo",
       prizes: "2,500",
-      image: "/assets/images/SnapSense.jpeg",
-      poster: "/assets/posters/SNAPSENSE.png"
+      image: "/assets/events/images/SnapSense.jpeg",
+      poster: "/assets/events/posters/SNAPSENSE.png"
     }
   }
 };

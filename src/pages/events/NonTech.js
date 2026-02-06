@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import EventCard from '../../components/EventCard';
-import DiceRoller from '../../components/DiceRoller';
-import ParticlesBackground from '../../components/ParticlesBackground';
-import BackButton from '../../components/BackButton';
+import EventCard from '../../components/events/EventCard';
+import DiceRoller from '../../components/events/DiceRoller';
+import ParticlesBackground from '../../components/events/ParticlesBackground';
+import BackButton from '../../components/events/BackButton';
 import './events.css';
 
 const NonTech = () => {
@@ -15,42 +15,42 @@ const NonTech = () => {
       slug: 'bigboss',
       tagline: 'Strategy, Survival & Social Dynamics In The Ultimate Reality Challenge',
       prize: '₹ 3,500 *',
-      image: '/assets/images/Biggboss.jpeg'
+      image: '/assets/events/images/Biggboss.jpeg'
     },
     {
       name: 'IPL Auction',
       slug: 'ipl-auction',
       tagline: 'Bid Smart, Build Teams & Dominate The Cricket Empire',
       prize: '₹ 3,000 *',
-      image: '/assets/images/IPLAuction.jpeg'
+      image: '/assets/events/images/IPLAuction.jpeg'
     },
     {
       name: 'Treasure Hunt',
       slug: 'treasure-hunt',
       tagline: 'Navigate The Unknown, Crack Codes & Discover Hidden Treasures',
       prize: '₹ 4,000 *',
-      image: '/assets/images/TreasureHunt.jpeg'
+      image: '/assets/events/images/TreasureHunt.jpeg'
     },
     {
       name: 'Connections',
       slug: 'connections',
       tagline: 'Link The Clues, Find Patterns & Master The Art Of Association',
       prize: '₹ 3,500 *',
-      image: '/assets/images/Connections.jpeg'
+      image: '/assets/events/images/Connections.jpeg'
     },
     {
       name: 'Murder Mystery',
       slug: 'murder-mystery',
       tagline: 'Unravel Secrets, Follow Clues & Solve The Enigma',
       prize: '₹ 2,500 *',
-      image: '/assets/images/Murder Mystery.jpeg'
+      image: '/assets/events/images/Murder Mystery.jpeg'
     },
     {
       name: 'Snap-Sense',
       slug: 'snap-sense',
       tagline: 'Sense the moment, capture the magic, win the game',
       prize: '₹ 2,500 *',
-      image: '/assets/images/SnapSense.jpeg'
+      image: '/assets/events/images/SnapSense.jpeg'
     }
   ];
 
@@ -91,7 +91,7 @@ const NonTech = () => {
     <div
       className="events-container events-transparent-bg"
       style={{
-        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
+        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/events/images/events-bg.jpeg')"
       }}
     >
       <BackButton />

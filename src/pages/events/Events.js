@@ -1,5 +1,4 @@
-import React from 'react';
-import CategoryCard from '../../components/CategoryCard';
+import CategoryCard from '../../components/events/CategoryCard';
 
 import { useNavigate } from 'react-router-dom';
 import './events.css';
@@ -10,17 +9,17 @@ const Events = () => {
   const voiceLines = {
     technical: {
       character: 'Dustin',
-      audio: '/assets/audio/dustin-technical.mp3',
+      audio: '/assets/events/audio/dustin-technical.mp3',
       subtitle: 'Check out our Technical Events. Over!'
     },
     nontech: {
       character: 'Max',
-      audio: '/assets/audio/max-nontech.mp3',
+      audio: '/assets/events/audio/max-nontech.mp3',
       subtitle: 'Non-Tech Events - jump right in. Over!'
     },
     flagship: {
       character: 'Steve',
-      audio: '/assets/audio/steve-flagship.mp3',
+      audio: '/assets/events/audio/steve-flagship.mp3',
       subtitle: 'Flagship Events - don\'t miss these. Over!'
     }
   };
@@ -30,7 +29,7 @@ const Events = () => {
       <div
         className="events-container"
         style={{
-          backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
+          backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/events/images/events-bg.jpeg')"
         }}
       >
         {/* Upside Down Atmosphere */}
@@ -68,7 +67,7 @@ const Events = () => {
               character={voiceLines.technical.character}
               audioSrc={voiceLines.technical.audio}
               subtitleText={voiceLines.technical.subtitle}
-              clickAudioSrc="/assets/audio/Dustin_Technical_audio.mpeg"
+              clickAudioSrc="/assets/events/audio/Dustin_Technical_audio.mpeg"
             />
             <CategoryCard
               title="FLAGSHIP EVENTS"
@@ -77,7 +76,7 @@ const Events = () => {
               character={voiceLines.flagship.character}
               audioSrc={voiceLines.flagship.audio}
               subtitleText={voiceLines.flagship.subtitle}
-              clickAudioSrc="/assets/audio/Steve_Flagship_audio.mpeg"
+              clickAudioSrc="/assets/events/audio/Steve_Flagship_audio.mpeg"
             />
             <CategoryCard
               title="NON-TECH EVENTS"
@@ -86,7 +85,7 @@ const Events = () => {
               character={voiceLines.nontech.character}
               audioSrc={voiceLines.nontech.audio}
               subtitleText={voiceLines.nontech.subtitle}
-              clickAudioSrc="/assets/audio/Max_Nontechnical_audio.mpeg"
+              clickAudioSrc="/assets/events/audio/Max_Nontechnical_audio.mpeg"
             />
 
 

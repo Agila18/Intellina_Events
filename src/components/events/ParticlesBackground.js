@@ -115,6 +115,10 @@ const ParticlesBackground = () => {
     if (init) {
         return (
             <div className="particle-network-animation"> {/* Wrapper to contain glows and particles */}
+                <div
+                    className="particle-background-image"
+                    style={{ backgroundImage: "url('/assets/events/images/star-bg.jpg')" }}
+                ></div>
                 <div className="glow glow-1"></div>
                 <div className="glow glow-2"></div>
                 <div className="glow glow-3"></div>
