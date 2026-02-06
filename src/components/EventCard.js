@@ -1,7 +1,6 @@
 import React from 'react';
 import './EventCard.css';
-import notchTopLeft from '../pages/events/images/notch-top-left.png';
-import notchBottomRight from '../pages/events/images/notch-bottom-right.png';
+
 
 const EventCard = ({ name, tagline, prize, image, onClick }) => {
   return (
@@ -10,12 +9,12 @@ const EventCard = ({ name, tagline, prize, image, onClick }) => {
       {/* Notch Images (Hover Effects) */}
       <img
         className="notch-img top-left"
-        src={notchTopLeft}
+        src="/assets/images/notch-top-left.png"
         alt=""
       />
       <img
         className="notch-img bottom-right"
-        src={notchBottomRight}
+        src="/assets/images/notch-bottom-right.png"
         alt=""
       />
 

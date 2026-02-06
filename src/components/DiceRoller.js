@@ -444,7 +444,7 @@ const DiceRoller = ({ category = 'technical' }) => {
 
               <h2 className="text-gray-500 text-xs uppercase tracking-[0.5em] font-bold mb-3 opacity-80">Sync Complete</h2>
 
-              <h3 className="text-white text-4xl mb-6 uppercase tracking-tighter leading-none"
+              <h3 className="text-white text-2xl sm:text-4xl mb-6 uppercase tracking-tighter leading-none"
                 style={{
                   fontFamily: "'Orbitron', sans-serif",
                   fontWeight: 900,
@@ -470,13 +470,13 @@ const DiceRoller = ({ category = 'technical' }) => {
 
                 <div className="relative z-10">
                   <p className="text-[#ff2b2b] text-[10px] uppercase tracking-[0.3em] mb-1 font-bold">Total Prizes Worth</p>
-                  <p className="text-white text-3xl font-black tracking-tighter" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                  <p className="text-white text-2xl sm:text-3xl font-black tracking-tighter" style={{ fontFamily: "'Orbitron', sans-serif" }}>
                     ₹ {selectedEvent.prizes} <span className="text-[#ff2b2b]">*</span>
                   </p>
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handleViewDetails}
                   className="flex-[2] relative overflow-hidden bg-[#ff1a1a] text-white font-black uppercase tracking-[0.2em] py-4 px-6 rounded-lg transition-all duration-300 transform group/btn active:scale-95 shadow-[0_0_30px_rgba(255,0,0,0.3)] energy-charge"

@@ -138,22 +138,6 @@ const events = {
       image: "/assets/posters/GPTathon.png"
     },
 
-    "open-talent": {
-      id: 8,
-      title: "OPEN TALENT",
-      category: "flagship",
-      description:
-        "Open Talent is a vibrant stage for participants to showcase their skills in singing, dancing, acting, comedy, or any unique performance art.",
-      stages:
-        `• Performance Round`,
-      rules:
-        `• Solo or group participation
-• Time limits strictly enforced`,
-      dateVenue: "April 5 | Main Stage",
-      prizes: "As per announcement",
-      image: "/assets/posters/OpenTalent.jpeg"
-    },
-
     esports: {
       id: 9,
       title: "E-SPORTS",
@@ -170,22 +154,6 @@ const events = {
       dateVenue: "April 5 | Gaming Arena",
       prizes: "As per announcement",
       image: "/assets/posters/E-Sports.png"
-    },
-
-    "rapid-chess": {
-      id: 10,
-      title: "RAPID CHESS",
-      category: "flagship",
-      description:
-        "Rapid Chess challenges players to think quickly and make strategic decisions under tight time controls, testing mental agility and focus.",
-      stages:
-        `• Knockout Rounds`,
-      rules:
-        `• Standard rapid chess rules
-• Arbiter’s decision is final`,
-      dateVenue: "April 5 | Chess Hall",
-      prizes: "As per announcement",
-      image: "/assets/posters/RapidChess.jpeg"
     }
   },
 
@@ -310,7 +278,7 @@ const events = {
 • Objects must be identified correctly`,
       dateVenue: "April 5 | Event Arena",
       prizes: "3,500",
-      image: "/assets/posters/ObjectOdyssey.jpeg"
+      image: "/assets/posters/OBJECTODYSSEY.png"
     },
 
     "snap-sense": {
@@ -331,7 +299,7 @@ const events = {
 • Theme-based photography challenges`,
       dateVenue: "April 5 | Campus Wide",
       prizes: "2,500",
-      image: "/assets/posters/SnapSense.jpeg"
+      image: "/assets/posters/SNAPSENSE.png"
     }
   }
 };

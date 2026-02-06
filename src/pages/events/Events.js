@@ -27,7 +27,12 @@ const Events = () => {
 
   return (
     <>
-      <div className="events-container">
+      <div
+        className="events-container"
+        style={{
+          backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%), url('/assets/images/events-bg.jpeg')"
+        }}
+      >
         {/* Upside Down Atmosphere */}
         <div className="upside-down-particles">
           <div className="spore"></div>
