@@ -611,6 +611,39 @@
     }
 }
 
+/* ==========================================
+   NEST HUB & SHORT VIEWPORTS (≤ 700px height)
+   ========================================== */
+@media (max-height: 700px) and (min-width: 769px) {
+    .event-desc-overlay {
+        padding: 20px;
+    }
+
+    .event-desc-card {
+        padding: 30px 40px;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+
+    .event-desc-layout {
+        gap: 30px;
+    }
+
+    .event-media-container {
+        max-height: 60vh;
+        max-width: 380px;
+    }
+
+    .event-desc-title {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+    }
+
+    .tab-content {
+        margin-bottom: 30px;
+    }
+}
+
 /* ===========================
    MOBILE VIEW (≤ 768px)
    =========================== */

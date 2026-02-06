@@ -354,6 +354,21 @@ const DiceRoller = ({ category = 'technical' }) => {
           animation: typing 1.5s steps(22, end) forwards; /* Adjusted steps to char count approx */
           display: inline-block;
           text-align: center;
+          font-size: 30px;
+        }
+
+        @media (max-width: 768px) {
+          .typing-text {
+            font-size: 18px;
+            letter-spacing: 0.2em;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .typing-text {
+            font-size: 14px;
+            letter-spacing: 0.15em;
+          }
         }
         .die-implode {
           animation: dieImplode 0.8s ease-out forwards;
@@ -388,17 +403,6 @@ const DiceRoller = ({ category = 'technical' }) => {
         }
       `}</style>
 
-      {/* Dice Tooltip Prompt */}
-      {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && countdown === null && !showTyping && (
-        <div className="fixed bottom-[145px] right-[25px] z-[60] animate-fadeIn pointer-events-none">
-          <div className="bg-black text-white px-5 py-3 rounded-xl border border-red-500/50 shadow-[0_0_20px_rgba(255,0,0,0.4)] relative">
-            <p className="text-sm font-bold tracking-wider uppercase">Tap Your Lucky Event!</p>
-            <div className="absolute bottom-[-8px] right-[40px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-black"></div>
-            <div className="absolute bottom-[-9px] right-[40px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-red-500/50 -z-10"></div>
-          </div>
-        </div>
-      )}
-
       {/* Countdown Overlay */}
       {countdown !== null && (
         <div className="fixed inset-0 flex items-center justify-center z-[110] pointer-events-none">
@@ -425,6 +429,17 @@ const DiceRoller = ({ category = 'technical' }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {/* Dice Tooltip Prompt - Now inside container to move with it and scale */}
+        {(showPrompt || isHovered) && !isRolling && !isCentering && !showResult && countdown === null && !showTyping && (
+          <div className="absolute bottom-[105%] right-0 z-[60] animate-fadeIn pointer-events-none w-[280px]">
+            <div className="bg-black text-white px-5 py-3 rounded-xl border border-red-500/50 shadow-[0_0_20px_rgba(255,0,0,0.4)] relative">
+              <p className="text-sm font-bold tracking-wider uppercase whitespace-nowrap">Tap Your Lucky Event!</p>
+              <div className="absolute bottom-[-8px] right-[45px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-black"></div>
+              <div className="absolute bottom-[-9px] right-[45px] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-red-500/50 -z-10"></div>
+            </div>
+          </div>
+        )}
+
         <div
           className={`die ${isRolling ? 'rolling' : 'idle'}`}
           data-face={currentFace}
