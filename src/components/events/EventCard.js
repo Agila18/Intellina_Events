@@ -9,12 +9,12 @@ const EventCard = ({ name, tagline, prize, image, onClick }) => {
       {/* Notch Images (Hover Effects) */}
       <img
         className="notch-img top-left"
-        src="/assets/images/notch-top-left.png"
+        src="/assets/events/images/notch-top-left.png"
         alt=""
       />
       <img
         className="notch-img bottom-right"
-        src="/assets/images/notch-bottom-right.png"
+        src="/assets/events/images/notch-bottom-right.png"
         alt=""
       />
 

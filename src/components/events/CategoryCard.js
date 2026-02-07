@@ -5,14 +5,23 @@ import WalkieTalkie from './WalkieTalkie';
 const CategoryCard = ({ title, subtitle, route, character, audioSrc, subtitleText, clickAudioSrc, onReadyToNavigate }) => {
   const navigate = useNavigate();
   const [isTransmitting, setIsTransmitting] = useState(false);
+  const clickAudioRef = React.useRef(null);
+
+  // Preload audio
+  React.useEffect(() => {
+    if (clickAudioSrc) {
+      clickAudioRef.current = new Audio(clickAudioSrc);
+      clickAudioRef.current.load();
+    }
+  }, [clickAudioSrc]);
 
   const handleClick = () => {
     if (isTransmitting) return; // Prevent double clicks
 
     // Play click audio immediately if provided
-    if (clickAudioSrc) {
-      const audio = new Audio(clickAudioSrc);
-      audio.play().catch(error => {
+    if (clickAudioRef.current) {
+      clickAudioRef.current.currentTime = 0;
+      clickAudioRef.current.play().catch(error => {
         console.error('Error playing click audio:', error);
       });
     }

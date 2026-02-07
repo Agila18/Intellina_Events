@@ -5,12 +5,35 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, per
     const [status, setStatus] = useState('idle'); // idle, transmitting
     const [currentSubtitle, setCurrentSubtitle] = useState('');
     const [showSubtitle, setShowSubtitle] = useState(false);
-    const audioRef = useRef(null);
     const isMounted = useRef(true);
 
+    // Audio Object Refs
+    const voiceAudioRef = useRef(null);
+    const clickAudioRef = useRef(null);
+    const staticAudioRef = useRef(null);
+    const squelchAudioRef = useRef(null);
+
     useEffect(() => {
+        // Preload Voice
+        if (audioSrc) {
+            voiceAudioRef.current = new Audio(audioSrc);
+            voiceAudioRef.current.load();
+        }
+
+        // Preload SFX
+        clickAudioRef.current = new Audio('/assets/events/audio/walkie-click.mp3');
+        clickAudioRef.current.load();
+
+        staticAudioRef.current = new Audio('/assets/events/audio/walkie-static-loop.mp3');
+        staticAudioRef.current.loop = true;
+        staticAudioRef.current.volume = 0.2;
+        staticAudioRef.current.load();
+
+        squelchAudioRef.current = new Audio('/assets/events/audio/walkie-squelch.mp3');
+        squelchAudioRef.current.load();
+
         return () => { isMounted.current = false; };
-    }, []);
+    }, [audioSrc]);
 
     useEffect(() => {
         if (isActive) {
@@ -18,18 +41,19 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, per
         }
     }, [isActive]);
 
-    const playAudio = (src) => {
-        return new Promise((resolve, reject) => {
-            const audio = new Audio(src);
+    const playAudioRef = (audioRef) => {
+        return new Promise((resolve) => {
+            const audio = audioRef.current;
+            if (!audio) return resolve();
+
             audio.onended = resolve;
             audio.onerror = () => {
-                console.warn(`Audio missing: ${src}`);
-                // If audio fails, simulate a small delay or resolve immediately
-                // We rely on subtitle typing for main duration if audio missing
+                console.warn(`Audio error/missing`);
                 resolve();
             };
+            audio.currentTime = 0;
             audio.play().catch(e => {
-                console.warn("Audio play failed (interaction policy?):", e);
+                console.warn("Audio play failed:", e);
                 resolve();
             });
         });
@@ -54,31 +78,28 @@ const WalkieTalkie = ({ isActive, onComplete, character, audioSrc, subtitle, per
         try {
             // Sequence:
             // 1. Click
-            await playAudio('/assets/events/audio/walkie-click.mp3');
+            await playAudioRef(clickAudioRef);
 
             // 2. Squelch + Static start
-            const staticAudio = new Audio('/assets/events/audio/walkie-static-loop.mp3');
-            staticAudio.loop = true;
-            staticAudio.volume = 0.2;
-            staticAudio.play().catch(() => { });
+            if (staticAudioRef.current) {
+                staticAudioRef.current.currentTime = 0;
+                staticAudioRef.current.play().catch(() => { });
+            }
 
-            await playAudio('/assets/events/audio/walkie-squelch.mp3');
+            await playAudioRef(squelchAudioRef);
 
             // 3. Voice + Subtitle
             // Run subtitle concurrently with voice, but await BOTH
-            // This ensures that even if audio is missing, we wait for the text to type out
             await Promise.all([
                 typeWriter(subtitle),
-                playAudio(audioSrc)
+                playAudioRef(voiceAudioRef)
             ]);
 
             // 4. End transmission
             if (isMounted.current) {
-                // If persistActive is true, we don't pause the static or status yet
-                // The component unmounting will clean it up naturally
                 if (!persistActive) {
-                    staticAudio.pause();
-                    await playAudio('/assets/events/audio/walkie-squelch.mp3'); // Squelch out
+                    if (staticAudioRef.current) staticAudioRef.current.pause();
+                    await playAudioRef(squelchAudioRef); // Squelch out
                 }
             }
 
